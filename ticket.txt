@@ -6,6 +6,7 @@ L MUR-2622 - timer send with email
 middle
 M MUR-2690 - websocket binary
 M MUR-3172 - websocket binary
+M MUR-4690 - bulknotify device2
 L MUR-3026 - auth0 can automation
 L MUR-4721 - add element to migration 
 L MUR-2706 - keystore os time
@@ -16,7 +17,6 @@ L MUR-2704 - eventhub send
 
 
 small
-M MUR-4690 - bulknotify device2
 L MUR-4827 - Auth0.getUserLoginUrl
 L MUR-3771 - module
 L MUR-4438 - mbed unregister
