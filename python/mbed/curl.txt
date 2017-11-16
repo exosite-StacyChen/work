@@ -40,3 +40,11 @@ curl -X PUT \
     "endpoint_type": ""
   }
 }'
+
+curl -X GET \
+  https://api.connector.mbed.com/v2/notification/callback \
+  -H 'authorization: Bearer LM3NAULhO0VLikCtTUS4sMxJTPhJzzYT4xtAF1Z8IJirpsAHr9O1nHUdGK5RK2DcZgMR3anvqUeyRFRwHCT7DQ0n99oLNLYMopEq' \
+  -H 'content-type: application/json' 
+
+
+https://connector.mbed.com/#endpoints
