@@ -146,7 +146,7 @@ def main():
             "sid": "o11ykvtva1qvk0000"
         }
     ]
-    interval = (endTime - startTime) / 3000
+    interval = (endTime - startTime) / 3000 / 8
     write(host, solutions, int(startTime),
           endTime, interval, "metric10", 10)
 
