@@ -8,10 +8,10 @@ import requests
 class ExoMbed(object):
 
     def __init__(self):
-        try:
-            self.BuiltIn = BuiltIn()
-        except:
-            print('import BuiltIn failed')
+        # try:
+        #     self.BuiltIn = BuiltIn()
+        # except:
+        #     print('import BuiltIn failed')
 
         self.SESSION = requests.Session()
         self.TOKEN = None
@@ -64,12 +64,9 @@ class ExoMbed(object):
         session = requests.Session()
 
         data = self.mbed_call_back(token)
-        print(data)
         exositeToken = data['headers']['X-Exosite-Token']
         url = data['url']
         deviceList = self.mbed_endpoint_list()
-        print(url)
-        print(deviceList)
         session.headers = {
             'x-exosite-token': '{exositeToken}'.format(**locals()),
             'Content-Type': 'application/json'
@@ -95,4 +92,26 @@ class ExoMbed(object):
 
 if __name__ == '__main__':
     ExoMbed = ExoMbed()
-    ExoMbed.mbed_device_create()
+    command=str(sys.argv[1])
+    if command=="create" or command=="c":
+        print("Create device")
+        ExoMbed.mbed_device_create()
+
+    elif command=="u":
+        print("Unregister device")
+        ExoMbed.mbed_device_unregistered()
+
+    elif command=="s" or command=="stop":
+        print("Stop to send device")
+        ExoMbed.mbed_device_stop_send_data()
+
+    elif command=="l" or command=="list":
+        print("List device")
+        print(ExoMbed.mbed_endpoint_list())
+
+    elif command=="cb" or command=="callback":
+        print("Get mbed call back")
+        print(ExoMbed.mbed_call_back())
+        
+    else:
+        print("none")
