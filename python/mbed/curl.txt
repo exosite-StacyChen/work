@@ -48,3 +48,18 @@ curl -X GET \
 
 
 https://connector.mbed.com/#endpoints
+
+
+
+curl -X PUT \
+  https://mbed-staging.hosted.exosite.io/callback/f47tg1clzyw800000 \
+  -H 'authorization: Bearer LM3NAULhO0VLikCtTUS4sMxJTPhJzzYT4xtAF1Z8IJirpsAHr9O1nHUdGK5RK2DcZgMR3anvqUeyRFRwHCT7DQ0n99oLNLYMopEq' \
+  -H "X-Exosite-Token:88d55674-e7e8-4e0e-92a1-f68270ebb1aa" \
+  -H 'content-type: application/json' \
+  -d '{"de-registrations": ["305adf26-7a96-449e-aa6f-ef17914aea4f"]}'
+
+
+curl -X GET \
+  https://mbed-staging.hosted.exosite.io/endpoint \
+  -H 'authorization: Bearer LM3NAULhO0VLikCtTUS4sMxJTPhJzzYT4xtAF1Z8IJirpsAHr9O1nHUdGK5RK2DcZgMR3anvqUeyRFRwHCT7DQ0n99oLNLYMopEq' \
+  -H 'content-type: application/json' 
