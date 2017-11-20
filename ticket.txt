@@ -1,6 +1,7 @@
 big
 C MUR-4858 - tsdb export parameter
 L MUR-2622 - timer send with email
+L MUR-4438 - mbed unregister
 
 
 middle
@@ -13,13 +14,12 @@ L MUR-2706 - keystore os time
 L MUR-4597 - spms owning_node_id
 L MUR-2729 - http performance
 L MUR-4857 - tsdb query invalid metric
-L MUR-2704 - eventhub send
+L MUR-2704 - send timer with websocket function
 
 
 small
 L MUR-4827 - Auth0.getUserLoginUrl
 L MUR-3771 - module
-L MUR-4438 - mbed unregister
 L MUR-3141 - user oauth RedirectPath
 L MUR-2698 - response header X-Request-ID
 L MUR-2574 - config service limit test
