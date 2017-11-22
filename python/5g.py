@@ -23,28 +23,24 @@ def main():
             Data schema: 10 Metrics and 2 tags
             500 KB, 50 MB, 5 GB
         '''
-        # solutions = {
-        #     "name":"qa-201700920-testing-08",
-        #     "sid":"y4px4votkm3s00000"
-        # }
+        solutions = {
+                "name":"qa-201700920-testing-09",
+                "sid":"splj3wpelozk0000"
+            }
+        host = 'https://{}.{}'.format(solutions['name'], biz_info['solution_host'])
         
         # one solution many times
-        # host = 'https://{}.{}'.format(solutions['name'], biz_info['solution_host'])
         # retried = 1
-        # while retried <= 5:
+        # while retried <= 1:
         #     print("{}:".format(retried))
-        #     out = query_and_wait(host, startTime, endTime, "metric10", 10)
+        #     out = query_and_wait(host, startTime, endTime, "metric50", 50)
         #     retried = retried + 1
 
         # one solution list all status
         # data=getData(host+'/tsdb/export/list')
         # i=0
         # data=json.loads(data)
-        # # print(data[1])
-        # # print(data[1].get('state'))
-        # while i<100:
-        #     # d=json.loads(data[i])
-        #     # print(i)
+        # while i<len(data):
         #     if data[i].get('state')!="enqueued":
         #         print(data[i].get('state'))
         #         # break
@@ -87,14 +83,11 @@ def main():
                 "sid":"y4px4votkm3s00000"
             }
         ]
-        requestid=[{"job_id":"QcivuCO7768dAXOxZ7CXCR1SRpCkE43RuA0a4BmkZ4tUk32N.iz6g00c7VYW8ua58KWOobPhrmRbTIT8QKpnDcsxlTW_tEAeALaLRAt4bUXJ0MAtHEVc0T9kFn5WOOAW"},
-            {"job_id":"zaVyQQgUdK1kUWQ1553MUM.AoIpNubvpznQqYJFhhHc6N68IWF9tQepSm0JiSyojOl12x7_EfNIqgCzdfXr.0SCu8nZFeSxdPifv3iCu.tX0WmzfNCRlnsIYM.NZ2kYy"},
-            {"job_id":"RL8jOwcjJ8SITtrk5SOybWB_JqqCi1V9pxVPQhkS8UHzIBXL9Us5OKNSUoI_JCguIO5sn70RK4Rr61Y6aLX17o5kqh7u0IvbWqCpiob9DIODH5ETqXHiWyaoiHaCbM6w"},
-            {"job_id":"xo2RwGPIbYTXtMP_wp5_gfBqWgyNInJMfPpB8tDhje4_Ja.UDM2drzlu4EHIhpkizYVjjaAylThbsS85IDYjR.0yqX..hBvw2iSfyrnfpHmun9xUGwLHtQZmkbaf6NH1"},
-            {"job_id":"1P1yB2S0cRboJncopGaN738ZEyHck6KummC5g2KDvwhfOlq2MYLF4tTrrbQs7B05JOUOonY_w2y.w_XN2XfP4AUhxGvxokY3OeqwBQxSQxkMn3i6TGaRJhuXPMXlJ1e4"},
-            {"job_id":"KwwTYuabMJKocSTEi3pU.T2MtYnRBVzxNTiLZWWCVXjWFoOaNkBVi2Tw67rqCkQMwKVxXOpd5uwdrtg8sACOsBwbXM11Xmhmwvk9xShcnwMGIdBorFBdGGUaylCdbclq"},
-            {"job_id":"dqys0s4KiSDCDHLq7bPVEQ.e9axn0SQu3bWOy5UA3K_8rnJ1962IQTAMfXrZebQ1d926GPUQ8FA_590.DpC6vqBYT6obhKjhlMBQBnQNmrGIQqPmAZJgZuVHOXEX.6Zf"},
-            {"job_id":"xil82.9gqOO_OsjGxKyJTULp94wLrzpk2ll.wPxKylSfDYU7AKY52F2NTZwxJ8xjkkKHhBiyK0Ku0BfipKRXYPo2XUEPB9k_jFj.UmMWdFLFU75XiynceK8nkk7H.5IM"}]
+        requestid=[{"job_id":"Si4PCsePYauq8LeAg9oQt1OD4Qo_QxCPjLHe1Ye61LsbT4328qKC9yEiIY7ZEWgU8q2ukdmRQkDTKM8xFpQcj.uw1fDVyPpcHGXTJol5x9fqVB_hmBPqwT6OLh2uuYIg"}]
+        
+        #search one
+        # host = 'https://{}.{}'.format(solutions[0]['name'], biz_info['solution_host'])
+        # print(readData(host+'/tsdb/export/exportJobInfo',requestid[0]))
         
         # many solution one times
         retried = 1
@@ -107,16 +100,16 @@ def main():
         # many solution list one status
         # print(data[1])
         # print(data[1].get('state'))
-        while index < len(solutions):
-            host = 'https://{}.{}'.format(solutions[index]['name'], biz_info['solution_host'])
-            data=getData(host+'/tsdb/export/list')
-            data=json.loads(data)
-            i=0
-            # while data[i].get('job_id')!=requestid[index].get('job_id'):
-            #     i=i+1
-            # print("{}:{}".format(index,data[i].get('job_id')))
-            print("{}:{}".format(index,data[i].get('state')))
-            index=index+1
+        # while index < len(solutions):
+        #     host = 'https://{}.{}'.format(solutions[index]['name'], biz_info['solution_host'])
+        #     data=getData(host+'/tsdb/export/list')
+        #     data=json.loads(data)
+        #     i=0
+        #     # while data[i].get('job_id')!=requestid[index].get('job_id'):
+        #     #     i=i+1
+        #     # print("{}:{}".format(index,data[i].get('job_id')))
+        #     print("{}:{}".format(index,data[i].get('state')))
+        #     index=index+1
         # print("current {}".format(i))
         
         

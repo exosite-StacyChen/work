@@ -23,3 +23,8 @@ curl -X POST http://event-hub-dev.hosted.exosite.io/api/v1/eventhub/u29i9d7t2cdu
 
 ninazhang+dev@exosite.com
 ninazhang+dev
+
+curl -X POST \
+  https://dsdadsd.apps.exosite-staging.io/eventhub \
+  -H 'content-type: application/json' \
+  -d '{"event_data":{"test":"1234567ss"},"publisher":"stacy"}' -i
