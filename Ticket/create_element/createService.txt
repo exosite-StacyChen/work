@@ -1,6 +1,6 @@
 curl -X POST \
   https://bizapi-dev.hosted.exosite.io/api:1/exchange/r4q2m9xs2w/element/ \
-  -H 'authorization: Basic dGVzdGluZ0BleG9zaXRlLmNvbToxMjM0ZXN6eGN2Kys=' \
+  -H 'authorization: Basic <remove insecure key>' \
   -H 'content-type: application/json' \
   -d '{
 "bizid": "r4q2m9xs2w",
