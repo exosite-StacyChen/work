@@ -49,6 +49,15 @@ def main():
         # print("current {}".format(i))
         # print(len(length))
 
+        data=getData(host+'/tsdb/export/list')
+        data=json.loads(data)
+        print(data[0]['state'])
+
+        # data=readData(host+'/tsdb/export/exportJobInfo',{"job_id":"BxpKuW3XTzViMiXj2FIXPYwVo4Sdx5_wnmHHkNvLOMuuAv9WzNTUAOMEGyiBxnhk_shqM_B2ld1_H0pnTOOm6OwISMc6wWxJaem2zikMtUQUpexNcFDi6ajH7Nttz6uf"})
+        # data=json.loads(data)
+        # print(data)
+
+
         solutions = [
             {
                 "name":"qa-201700920-testing-09",
