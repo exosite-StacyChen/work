@@ -49,9 +49,9 @@ def main():
         # print("current {}".format(i))
         # print(len(length))
 
-        data=getData(host+'/tsdb/export/list')
-        data=json.loads(data)
-        print(data[0]['state'])
+        # data=getData(host+'/tsdb/export/list')
+        # data=json.loads(data)
+        # print(data[0]['state'])
 
         # data=readData(host+'/tsdb/export/exportJobInfo',{"job_id":"BxpKuW3XTzViMiXj2FIXPYwVo4Sdx5_wnmHHkNvLOMuuAv9WzNTUAOMEGyiBxnhk_shqM_B2ld1_H0pnTOOm6OwISMc6wWxJaem2zikMtUQUpexNcFDi6ajH7Nttz6uf"})
         # data=json.loads(data)
@@ -92,11 +92,13 @@ def main():
                 "sid":"y4px4votkm3s00000"
             }
         ]
-        requestid=[{"job_id":"Si4PCsePYauq8LeAg9oQt1OD4Qo_QxCPjLHe1Ye61LsbT4328qKC9yEiIY7ZEWgU8q2ukdmRQkDTKM8xFpQcj.uw1fDVyPpcHGXTJol5x9fqVB_hmBPqwT6OLh2uuYIg"}]
+        requestid=[{"job_id":"88YCx7v75g9CcRcobAAQmlJ7wF57MJb2j.35T9uO4tNMsKMS5l01uR8aLSeMFXJ2KWkHdL.N08TbgHah_Xec9_E4Qom6vuomzCDKIrFdA6zax1p1XPwBPteIRy0dN4QZ"}]
         
         #search one
         # host = 'https://{}.{}'.format(solutions[0]['name'], biz_info['solution_host'])
-        # print(readData(host+'/tsdb/export/exportJobInfo',requestid[0]))
+        # data=readData(host+'/tsdb/export/exportJobInfo',requestid[0])
+        # data=json.loads(data)
+        # print(data['length'])
         
         # many solution one times
         retried = 1

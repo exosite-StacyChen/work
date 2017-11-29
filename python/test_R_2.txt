@@ -45,8 +45,6 @@ https://openshift.exosite.io/console/project/murano-staging-preview/browse/pods/
 Request ID: {"job_id":"XKngbego6cgHYBK.t.7U.z3IQ0r8Whq3lYp6pShakHfKiCWKZheDuu1kHXe7TbBWWDCkBRknykrsjpKGFE5tS2J_e4DSrBlgf3_7OGxxBAyORddFPdad0YtHuQeAK814"}
 
 
-
-
 fail
  Sent 400 in 5496ms
  job start
@@ -55,6 +53,7 @@ fail
 
 
 
-
+success
+ Time spent: 7827 seconds 
  Request ID: {"job_id":"88YCx7v75g9CcRcobAAQmlJ7wF57MJb2j.35T9uO4tNMsKMS5l01uR8aLSeMFXJ2KWkHdL.N08TbgHah_Xec9_E4Qom6vuomzCDKIrFdA6zax1p1XPwBPteIRy0dN4QZ"}
 
