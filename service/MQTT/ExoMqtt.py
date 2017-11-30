@@ -9,11 +9,12 @@ class ExoMqtt(object):
 
     def __init__(self):
         self.message = {}
+        self.thread_event = ""
 
     def close_loop(self, client):
         """ Close loop to MQTT server """
         print('end loop')
-        client.loop_stop()
+        self.thread_event.set()
 
     def message_clear(self):
         """ Clear all received messages"""
@@ -57,7 +58,6 @@ class ExoMqtt(object):
         client.publish(topic, message, qos=qos)
 
     def on_disconnect(self, client, userdata, rc):
-        print(rc)
         if rc != 0:
             print("DisConnected with error", rc)
             self.message['status_code'] = rc
@@ -82,7 +82,8 @@ class ExoMqtt(object):
     def start_loop(self, client):
         """ Start loop to MQTT server """
         print('start loop')
-        thread = threading.Thread(target=client.loop_forever)
+        self.thread_event = threading.Event()
+        thread = threading.Thread(target=client.loop_forever,args=(1,self.thread_event))
         thread.start()
         time.sleep(1)
 
@@ -97,7 +98,8 @@ if __name__ == '__main__':
     client = ExoMqtt.mqtt_connect(host)
     provision_str = "$provision/" + input("Username? ")
     msg=str(input("Password? "))
-    ExoMqtt.mqtt_publish(client , provision_str,msg)
+    ExoMqtt.mqtt_publish(client , str(provision_str) ,msg)
     ExoMqtt.start_loop(client)
     print(ExoMqtt.mqtt_message())
     ExoMqtt.close_loop(client)
+    ExoMqtt.mqtt_disconnect(client)
