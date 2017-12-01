@@ -10,6 +10,10 @@ class ExoMqtt(object):
     def __init__(self):
         self.message = {}
         self.thread_event = ""
+        self.publish_data = {}
+        self.publish_data['message'] = ""
+        self.publish_data['topic'] = ""
+        self.publish_data['qos'] = 0
 
     def close_loop(self, client):
         """ Close loop to MQTT server """
@@ -40,11 +44,13 @@ class ExoMqtt(object):
         print("connecting to broker")
         client.on_message = self.on_message
         client.on_disconnect = self.on_disconnect
-        client.connect(server, 443)
+        client.on_publish = self.on_publish
+        client.on_connect = self.on_connect
         return client
 
     def mqtt_disconnect(self, client):
         """ Mqtt disconnect """
+        print("Mqtt disconnect")
         client.disconnect()
 
     def mqtt_message(self):
@@ -54,8 +60,10 @@ class ExoMqtt(object):
 
     def mqtt_publish(self, client, topic, message=None, qos=0):
         """ Use mqtt protocol to activate the device """
-        print("publish data: {} to topic: {}".format(message, topic))
-        client.publish(topic, message, qos=qos)
+        # client.publish(topic, message, qos=qos)
+        self.publish_data['message'] = message
+        self.publish_data['topic'] = topic
+        self.publish_data['qos'] = qos
 
     def on_disconnect(self, client, userdata, rc):
         if rc != 0:
@@ -79,23 +87,34 @@ class ExoMqtt(object):
             self.message[topic].append(resp)
         self.message['status_code'] = 0
 
+    def on_publish(self, client, userdata, mid):
+        print("On published!")
+        # client.disconnect()
+
+    def on_connect(self, client, userdata, flags, rc):
+        print("On-connect return code: ", rc)
+        print("publish data: {} to topic: {}".format(self.publish_data['message'], self.publish_data['topic']))
+        client.publish(self.publish_data['topic'], self.publish_data[
+                       'message'], qos=self.publish_data['qos'])
+
     def start_loop(self, client):
         """ Start loop to MQTT server """
         print('start loop')
         self.thread_event = threading.Event()
-        thread = threading.Thread(target=client.loop_forever,args=(1,self.thread_event))
+        thread = threading.Thread(
+            target=client.loop_forever, args=(1, self.thread_event))
         thread.start()
         time.sleep(1)
 
 if __name__ == '__main__':
     env = input("ENV ? ( dev / staging / production ) ")
     host = input("Product ID? ") + ".m2.exosite-" + env + ".io"
-    
     ExoMqtt = ExoMqtt()
     client = ExoMqtt.mqtt_connect(host)
     provision_str = "$provision/" + input("Username? ")
-    msg=str(input("Password? "))
-    ExoMqtt.mqtt_publish(client , str(provision_str) ,msg)
+    msg = str(input("Password? "))
+    ExoMqtt.mqtt_publish(client, str(provision_str), msg)
+    client.connect(host, 443)
     ExoMqtt.start_loop(client)
     print(ExoMqtt.mqtt_message())
     ExoMqtt.close_loop(client)
