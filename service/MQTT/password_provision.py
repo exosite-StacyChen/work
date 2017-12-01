@@ -1,7 +1,7 @@
 from paho.mqtt import client as mqtt
 import ssl
 env = input("ENV ? ( dev / staging / production ) ")
-host = input("Product ID? ") + ".m2.exosite-" + env + ".io"
+host = input("Product ID? ") + ".m2.exosite-" + str(env) + ".io"
 
 cert = "./trusted.crt"
 
@@ -12,7 +12,6 @@ def on_connect(client, userdata, flags, rc):
     password = str(input("Password? ")) 
     client.publish(provision_str, password, qos=0)
     # client.disconnect()
-
 
 def on_message(client, userdata, msg):
     print("Provision succeeded!")

@@ -108,12 +108,12 @@ class ExoMqtt(object):
 
 if __name__ == '__main__':
     env = input("ENV ? ( dev / staging / production ) ")
-    host = input("Product ID? ") + ".m2.exosite-" + env + ".io"
+    host = input("Product ID? ") + ".m2.exosite-" + str(env) + ".io"
     ExoMqtt = ExoMqtt()
     client = ExoMqtt.mqtt_connect(host)
     provision_str = "$provision/" + input("Username? ")
     msg = str(input("Password? "))
-    ExoMqtt.mqtt_publish(client, str(provision_str), msg)
+    ExoMqtt.mqtt_publish(client, str(provision_str), msg.strip())
     client.connect(host, 443)
     ExoMqtt.start_loop(client)
     print(ExoMqtt.mqtt_message())
