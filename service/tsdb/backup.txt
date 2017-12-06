@@ -3,18 +3,6 @@ curl -X GET https://usage3.apps.exosite-staging.io/tsdb
 
 
 
-10 time ok
-1 time info
-1 time ok
-1 time info
-1 time ok
-
-10 time ok
-2 time info
-2 time ok
-2 time info
-1 time ok
-
 curl -X PUT http://localhost:8081/api/v1/serviceconfig/h2u47qrmwoz400000_tsdb \
 -H 'Content-type':'application/json' \
  -d '{"quota":{"calls_daily":10}}'
