@@ -15,3 +15,7 @@ sudo sh get-docker.sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 sudo apt-get install ruby2.4
+sudo npm install -g wscat
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable

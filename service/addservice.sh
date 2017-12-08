@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SOLUTION_ID="$1"
-BUSINESS_ID="$2"
-EXCHANGE="$3"
+SOLUTION_ID="$2"
+BUSINESS_ID="$3"
+EXCHANGE="$1"
 if [[ -z "$SOLUTION_ID" ]]; then
     SOLUTION_ID="a27fp8y8qvukg0000"
 fi
