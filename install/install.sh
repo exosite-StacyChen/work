@@ -1,3 +1,9 @@
+mkdir dqa
+cd dqa/
+git clone  git@github.com:exosite/dqa-murano.git
+git clone git@github.com:exosite-StacyChen/work.git
+git clone git@github.com:exosite/dqa-env.git
+git clone git@github.com:exosite/dqa-mqtt.git
 sudo apt-get install python-pip
 sudo  python dqa-env/exo-robot-runner setup
 sudo  python dqa-env/exo-robot-runner setup
@@ -19,3 +25,4 @@ sudo npm install -g wscat
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
+sudo apt-get install jq
