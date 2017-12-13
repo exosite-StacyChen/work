@@ -2,7 +2,8 @@
 file:solution-{solution_id}-test.robot https://jira.exosite.com/browse/MUR-5054
 test case:
 solution-{solution_id}-test - delete - should respond with 204 No Content
-沒有真的刪掉(刪兩次)=> 等五分鐘 => 沒有刪掉
+改成驗證serviceconfig不存在
+
 solution-{solution_id}-test - delete - should respond with 204 No Content for delete the same solution twice.
 第一次204 第二次404
 solution-{solution_id}-test - delete - should respond with 400 Bad Request for delete with invalid solution id, solutionId
@@ -12,7 +13,8 @@ solution-{solution_id}-test - delete - should respond with 400 Bad Request for d
 
 file:timeseries-{solution_id}-tags-test.robot
 test case:  timeseries-{solution_id}-tags-test - get - should respond with 200 tags information retrieved
-有時候刪太快可能還沒建立完
+1.給limit 但沒有用
+2.有時候刪太快可能還沒建立完
 { result: null,
   error: 'Client Error: Solution instance (solution_id: 3hTII6WoxF) has not been created yet. Request rejected.' }
 http://pegasus-api.hosted.exosite.io/api/v1/solution/x54elbta82lc0s4ss/logs
