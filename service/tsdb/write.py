@@ -137,8 +137,21 @@ def main():
     # [{'name': 'tsdb-5g-20170814', 'sid': 'o11ykvtva1qvk0000'}]
     # {'name': 'tsdb-5g-20170814', 'sid': 'o11ykvtva1qvk0000'}
     # 50000 bytes
+    # 204
+    # Count: 1526541578326  save: 10150000 bytes
+    # input_count:204
+    # [{'name': 'tsdb-5g-20170814', 'sid': 'o11ykvtva1qvk0000'}]
+    # {'name': 'tsdb-5g-20170814', 'sid': 'o11ykvtva1qvk0000'}
+    # 50000 bytes
+    # 204
+    # Count: 1537497254326  save: 18800000 bytes
+    # input_count:377
+    # 1350.36551785
+    # 377
 
     startTime = 1505903659000
+    # startTime = 1513749401510
+    # startTime=1526541578326
     endTime = 1537497255000
     solutions = [
         {
@@ -146,7 +159,7 @@ def main():
             "sid": "o11ykvtva1qvk0000"
         }
     ]
-    interval = (endTime - startTime) / 3000 / 8
+    interval = (endTime - startTime) / 3000 
     write(host, solutions, int(startTime),
           endTime, interval, "metric10", 10)
 
@@ -164,7 +177,7 @@ def get500MData(metricName, count, time):
     file = os.urandom(37470)
     file = base64.b64encode(file).decode('utf-8')
     byte = sys.getsizeof(repr(file))
-    print "{} bytes".format(byte)
+    print "{} bytes".format(byte*count)
     metrics = {}
     query = []
     for i in range(1, int(count) + 1, 1):

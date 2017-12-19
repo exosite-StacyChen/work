@@ -1,48 +1,107 @@
-send 
-{"service_function":"Keystore.set","parameters":[{
-	"key":"qa1","value":"1"
-},{
-	"key":"qa2","value":"2"
-},{
-	"key":"qa3","value":"3"
-},{
-	"key":"qa4","value":"4"
-},{
-	"key":"qa5","value":"5"
-},{
-	"key":"qa6","value":"6"
-},{
-	"key":"qa7","value":"7"
-},{
-	"key":"qa8","value":"8"
-},{
-	"key":"qa9","value":"9"
-},{
-	"key":"qa10","value":"10"
-},{
-	"key":"qa11","value":"11"
-},{
-	"key":"qa12","value":"12"
-},{
-	"key":"qa13","value":"13"
-},{
-	"key":"qa14","value":"14"
-},{
-	"key":"qa15","value":"15"
-},{
-	"key":"qa16","value":"16"
-},{
-	"key":"qa17","value":"17"
-},{
-	"key":"qa18","value":"18"
-},{
-	"key":"qa19","value":"19"
-},{
-	"key":"qa1","value":"20"
-}]}
-{"service_function":"Keystore.clear","parameters":[{}]}
+ curl -XPUT 'http://localhost:8081/api/v1/serviceconfig/ihat6xksaimw0000_email' -d '{"quota": {"emails_daily": 50}}' -H 'content-type:application/json' -ik
 
-listResults
-{"service_function":"","request_id":"","state":"","limit":"","output_level":"","start_time":"","end_time":""}
-
-{"service_function":""}
+{
+  "service_function": "Email.send",
+  "parameters": [
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    },
+    {
+      "to": "stacychen@exosite.com",
+      "subject": "Hello",
+      "text": "World"
+    }
+  ]
+}
