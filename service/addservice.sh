@@ -18,9 +18,13 @@ TOKEN=$(
             -H 'content-type: application/json' \
             -X POST -d '{"email": "testing@exosite.com", "password": "1234eszxcv++"}' | jq -r '.token'
 )
+printf  "solutionID:${SOLUTION_ID} \n"
+printf  "BUSINESS_ID:${BUSINESS_ID} \n"
+printf  "EXCHANGE:${EXCHANGE} \n"
 
-SERVICE=("twilio" "auth0" "mbed" "bulknotify" "spms" "http" "salesforceiot" "postgresql" "scripts" "eventhub" "portals")
-ELEMENTID=("5955b9efbf83ba00015fff45" "5955b9ecbf83ba00015fff3f" "59fc07e5a28459000146da6d" "59b6eb1ef50b8f0001dbfcc4" "5955b9edbf83ba00015fff43" "5a040251f0d1e8000102c3d5" "59facfb35e444400016a68f9")
+SERVICE=("timer" "twilio" "auth0" "mbed" "bulknotify" "spms" "http" "salesforceiot" "postgresql" "scripts" "eventhub" "portals")
+ELEMENTID=("5955b9eeb3e6b2000147cfc0" "5955b9efbf83ba00015fff45" "5955b9ecbf83ba00015fff3f" "59fc07e5a28459000146da6d" "59b6eb1ef50b8f0001dbfcc4" "5955b9edbf83ba00015fff43" "5a040251f0d1e8000102c3d5" "59facfb35e444400016a68f9")
+
 Fail=0
 count=0
 
@@ -62,41 +66,41 @@ if [[ "$EXCHANGE" == "Y" ]] || [[ "$EXCHANGE" == "y" ]]; then
     printf "Purchase End\n"
 fi
 
-if [[ "$Fail" == 0 ]]; then
-    printf "Service Adding Start\n"
-    for i in "${SERVICE[@]}"
-    do
-        printf "\n--------\n"
-        printf "Add Service: $i \n"
-        RESP=$(
-            curl 'http://localhost:8081/api/v1/solution/'$SOLUTION_ID'/serviceconfig' \
-                 -H 'Content-Type: application/json' \
-                 -X POST -d '{"service":"'$i'","solution_id":"'$SOLUTION_ID'"}' \
-                 -k --silent -L -w "\n%{http_code}"
-        )
+# if [[ "$Fail" == 0 ]]; then
+#     printf "Service Adding Start\n"
+#     for i in "${SERVICE[@]}"
+#     do
+#         printf "\n--------\n"
+#         printf "Add Service: $i \n"
+#         RESP=$(
+#             curl 'http://localhost:8081/api/v1/solution/'$SOLUTION_ID'/serviceconfig' \
+#                  -H 'Content-Type: application/json' \
+#                  -X POST -d '{"service":"'$i'","solution_id":"'$SOLUTION_ID'"}' \
+#                  -k --silent -L -w "\n%{http_code}"
+#         )
 
-        STATUS="${RESP##*$'\n'}"           
-        CONTENT="${RESP%$'\n'*}"
+#         STATUS="${RESP##*$'\n'}"           
+#         CONTENT="${RESP%$'\n'*}"
 
-        if [[ "$STATUS" == 200 ]] ; then
-            printf "200 Add Service Success ..... \n"
-        elif [[ "$STATUS" == 409 ]] ; then
-            printf "409 Add Service Fail : Service Is Existing In Application \n"
-        elif [[ "$STATUS" == 424 ]] ; then
-            printf "424 Add Service Fail : Service Name InCorrect \n"
-            break
-        elif [[ "$STATUS" == 000 ]] ; then
-            printf "Please login dqa-env/exo-openshift-hopper \n"
-            break
-        else
-            printf "Not Expected Error : ${STATUS} ${CONTENT} \n"
-            break
-        fi
-        printf "\n--------\n"
-    done
-    printf "\n--------\n"
-    printf "Service Adding End\n"
-fi
+#         if [[ "$STATUS" == 200 ]] ; then
+#             printf "200 Add Service Success ..... \n"
+#         elif [[ "$STATUS" == 409 ]] ; then
+#             printf "409 Add Service Fail : Service Is Existing In Application \n"
+#         elif [[ "$STATUS" == 424 ]] ; then
+#             printf "424 Add Service Fail : Service Name InCorrect \n"
+#             break
+#         elif [[ "$STATUS" == 000 ]] ; then
+#             printf "Please login dqa-env/exo-openshift-hopper \n"
+#             break
+#         else
+#             printf "Not Expected Error : ${STATUS} ${CONTENT} \n"
+#             break
+#         fi
+#         printf "\n--------\n"
+#     done
+#     printf "\n--------\n"
+#     printf "Service Adding End\n"
+# fi
 
 printf "\n -----------End----------\n"
 
