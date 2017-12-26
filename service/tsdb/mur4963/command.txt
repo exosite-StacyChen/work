@@ -1,5 +1,23 @@
-ab -c 1 -n 1 -T 'application/x-www-form-urlencoded' -p mur4963_content.txt -H 'Content-type:application/json' http://localhost:4000/api/v1/timeseries/u2o29ufxmmfc00000/multi_data 
+-------------------------------------------------
+------------------ApacheBench--------------------
+-------------------------------------------------
+-------------------------------------------------
+ab -c 1 -n 130 -T 'application/x-www-form-urlencoded' -p mur4963_content.txt -H 'Content-type:application/json' http://localhost:4000/api/v1/timeseries/u2o29ufxmmfc00000/multi_data 
 
+ab -c 1 -n 130 -T 'application/x-www-form-urlencoded' -p mur4963_content.txt -H 'Content-type:application/json' http://pegasus-cass-service-dev.hosted.exosite.io/api/v1/timeseries/xrv6xq7vzgz40000/multi_data 
+
+-c 同時上線user 
+-n 總共request
+第一項測試
+1.以lua測試使用者response time
+2.跑100次算平均時間
+第2項測試
+1.測試後紀錄50%response time
+2.10%以上fail則重新調整
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
 {"datapoints":[{"metrics":{"test":"test"},"tags":{"tag":"s"},"ts":"1513668075273ms","return_ts":true},{"metrics":{"test":"test"},"tags":{"tag":"s"},"ts":"1513668090228ms"}],"return_ts":true}
 
 

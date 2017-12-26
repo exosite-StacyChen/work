@@ -1,9 +1,0 @@
-solutionID: xrv6xq7vzgz40000 
-Metirc: qa_metrics 
-Metirc Size: 100 
-Tags Size: 0 
-Datapoint length: 1 
-export post Data to data/post_body_1513742867921.txt 
-export post Results to data/post_results_1513742867921.txt 
-Get Response: 15.31288ms 
-spend times : 15.31288ms 

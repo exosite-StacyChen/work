@@ -1,1 +1,0 @@
-{"return_ts": false, "datapoints": [{"metrics": {"qa_metrics_0": "hTDmsPMRZ+9PtZy1Z2/qPbfiPA=="}, "ts": "1513742866532ms", "tags": {}}]}

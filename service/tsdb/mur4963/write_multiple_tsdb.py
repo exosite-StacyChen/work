@@ -10,76 +10,109 @@ import random
 import math
 import re
 import signal
+import string
 
 
 def main():
     global host
     global domain
+    # domain = "stacy4.apps.exosite-staging.io/tsdb/write"
+    domain = "stacy4.apps.exosite-staging.io/write"
     # host = "localhost:4000"
-    domain = "stacychen.apps.exosite-dev.io/write"
-    host = "pegasus-cass-service-dev.hosted.exosite.io"
-    # solution =
-    #     {
-    #         "name": "stacy4",
-    #         "sid": "u2o29ufxmmfc00000"
-    #     }
-    #
+    # domain = "stacychen.apps.exosite-dev.io/write"
+    # host = "pegasus-cass-service-dev.hosted.exosite.io"
     solution = {
-        "name": "stacychen",
-        "sid": "xrv6xq7vzgz40000"
+        "name": "stacy4",
+        "sid": "u2o29ufxmmfc00000"
     }
+
+    # solution = {
+    #     "name": "stacychen",
+    #     "sid": "xrv6xq7vzgz40000"
+    # }
 
     # 400 {"result":null,"error":"Client Error: Exceeds maximum metric value size, 491520 bytes."}
     # write(solution,  "qa_metrics", 1, 0, 491520, 1)
     # 400 {"result":null,"error":"Client Error: Exceeds maximum number of data entries. [Max: 2000]"}
     # write(solution,  "qa_metrics", 1, 0, 5, 2001)
-
-    write(solution, "qa_metrics", metricsCount=1,
-          tagsCount=0, metricsSize=100, count=2001, return_ts=False)
-
-    # write(solution,  "qa_metrics", metricsCount=100,
-    #       tagsCount=0, metricsSize=100, count=21, return_ts=False)
-
-    # write(solution, "qa_metrics", metricsCount=1,
-    #       tagsCount=20, metricsSize=100, count=96, return_ts=False)
-
-    # write(solution, "qa_metrics", metricsCount=100,
-    #       tagsCount=19, metricsSize=100, count=3, return_ts=False)
-
-    # write(solution, "qa_metrics", metricsCount=10,
-    #       tagsCount=5, metricsSize=100, count=40, return_ts=False)
     # ts
     # [{"write_timestamp":1513669787791051},{"write_timestamp":1513669787791051}]
-    # write(host, solution, "qa_metrics", metricsCount=1, tagsCount=0,
+    # write(solution, "qa_metrics", metricsCount=1, tagsCount=0,
     # metricsSize=5, count=2,return_ts=True)
 
 
-def write(solution, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False):
+    write(solution, 0, 100, "qa_metrics", metricsCount=1,
+          tagsCount=0, metricsSize=100, count=2001, return_ts=False)
+
+    # write(solution, 0, 100,  "qa_metrics", metricsCount=100,
+    #       tagsCount=0, metricsSize=100, count=21, return_ts=False)
+
+    # data/post_results_1513927432649.txt
+    # write(solution, 0, 100, "qa_metrics", metricsCount=1,
+    #       tagsCount=20, metricsSize=100, count=96, return_ts=False)
+
+    # data/post_results_1513925433052.txt
+    # write(solution, 0, 100, "qa_metrics", metricsCount=100,
+    #       tagsCount=19, metricsSize=100, count=2, return_ts=False)
+
+    # data/post_results_1513927727366.txt
+    # write(solution, 0, 100, "qa_metrics", metricsCount=10,
+    #       tagsCount=5, metricsSize=100, count=34, return_ts=False)
+
+
+def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False):
     response = ""
-    startTime = time.time()
-    print "----------------------------------------"
-    print "-------------Call PegasusAPI------------"
-    print "----------------------------------------"
-    postData = getData(
-        metricName, metricsCount, tagsCount, metricsSize, count, return_ts)
-
-    response = postMultiDataVaiPegasus(solution['sid'], postData)
-    all = time.time() - startTime
-
-    saveResult(solution, metricName, metricsCount,
-               tagsCount, metricsSize, count, postData, response, all)
+    data = ""
+    avg_time = 0
     # print "----------------------------------------"
-    # print "-------------Call BizAPI----------------"
+    # print "-------------Call PegasusAPI------------"
     # print "----------------------------------------"
-    # postData = getData(
-    #     metricName, metricsCount, tagsCount, metricsSize, count, return_ts)
-    # response = postMultiDataVaiBiz(postData)
+    # for x in xrange(start, end):
+    #     print "Count: {}" .format(x)
+    #     postData = getData(
+    #         metricName, metricsCount, tagsCount, metricsSize, count, return_ts)
+    #     startTime = time.time()
+    #     response = postMultiDataVaiPegasus(solution['sid'], postData)
+    #     all = time.time() - startTime
+    #     avg_time = avg_time + all
+    #     post_path = saveData(postData)
+    #     data = addResult(solution, metricName, metricsCount,
+    #                      tagsCount, metricsSize, count, response, all, post_path) + data
+    # avg_time = float(avg_time / (end - start))
+    # saveResult(data, avg_time)
+    print "----------------------------------------"
+    print "-------------Call BizAPI----------------"
+    print "----------------------------------------"
+    avg_time = 0
+    for x in xrange(start, end):
+        print "Count: {}" .format(x)
+        postData = getData(
+            metricName, metricsCount, tagsCount, metricsSize, count, return_ts)
+        response = postMultiDataVaiBiz(postData)
+        post_path = saveData(postData)
+        avg_time = avg_time + convertToInteger(response)
+        data = addResult(solution, metricName, metricsCount,
+                         tagsCount, metricsSize, count, response, convertToInteger(response), post_path) + data
+        if response.status_code != 200:
+            break
+    avg_time = float(avg_time / (end - start))
+    saveResult(data, avg_time)
 
-    # saveResult(solution, metricName, metricsCount,
-    #            tagsCount, metricsSize, count, postData, response, response.content)
+
+def convertToInteger(resp):
+    time = resp.content
+    if time.find("ms") != -1:
+        time = time.strip('ms')
+        time = float(time.strip())/1000
+    elif time.find("s") != -1:
+        time = time.strip('s')
+        time = float(time.strip())
+    else:
+        time = 0
+    return time
 
 
-def saveResult(solution, metricName, metricsCount, tagsCount, metricsSize, count, postData, response, spendTime):
+def saveData(postData):
     timestamp = int(round(time.time() * 1000))
     result_path = "data/post_results_{}.txt".format(timestamp)
     post_path = "data/post_body_{}.txt".format(timestamp)
@@ -92,15 +125,31 @@ def saveResult(solution, metricName, metricsCount, tagsCount, metricsSize, count
             f.close()
     except IOError:
         pass
+    return post_path
+
+
+def addResult(solution, metricName, metricsCount, tagsCount, metricsSize, count, response, spendTime, post_path):
+    data = ""
+    data = data + "\n--------------------------------------------------\n"
     data = data + "solutionID: {} \n".format(solution['sid'])
-    data = data + "Metirc: {} \nMetirc Size: {} \n".format(metricName, metricsSize)
+    data = data + "Metirc: {} \nMetirc Size: {} \nMetirc length: {} \n".format(
+        metricName, metricsCount, metricsSize)
     data = data + "Tags Size: {} \n".format(tagsCount)
     data = data + "Datapoint length: {} \n".format(count)
     data = data + "export post Data to {} \n".format(post_path)
-    data = data + "export post Results to {} \n".format(result_path)
     data = data + "Get Response: {} \n".format(response.content)
-    data = data + "spend times : {} ".format(spendTime)
+    data = data + "spend times : {} s\n".format(spendTime)
+    data = data + "\n--------------------------------------------------\n"
     print data
+    return data
+
+
+def saveResult(data, avg_time):
+    timestamp = int(round(time.time() * 1000))
+    result_path = "data/post_results_{}.txt".format(timestamp)
+    data = "Avg Spend time: {} \n".format(avg_time) + data
+    print "Avg Spend time: {} \n".format(avg_time)
+    print "export Results to {} \n".format(result_path)
     try:
         f = open(result_path, "w")
         try:
@@ -125,17 +174,26 @@ def getData(metricName, metricsCount, tagsCount, metricsSize, count, return_ts):
         for x in xrange(0, metricsCount):
             # 491520 480kb
             size = random.randint(1, metricsSize)
-            file = os.urandom(size)
-            file = base64.b64encode(file).decode('utf-8')
-            byte = byte + sys.getsizeof(repr(file))
+            # file = os.urandom(size)
+            # file = base64.b64encode(file).decode('utf-8')
+            file = ''.join(random.choice(
+                string.ascii_uppercase + string.digits) for _ in range(size))
+            byte = byte + sys.getsizeof(file)
             metrics.update({"{}_{}".format(metricName, x): str(file)})
 
         millis = int(round(time.time() * 1000))
-        items = {
-            "metrics": metrics,
-            "tags":  tags,
-            "ts": "{}ms".format(millis)
-        }
+        if tagsCount == 0:
+            items = {
+                "metrics": metrics,
+                "ts": "{}ms".format(millis)
+            }
+        else:
+            items = {
+                "metrics": metrics,
+                "tags":  tags,
+                "ts": "{}ms".format(millis)
+            }
+
         datapoints.append(items)
 
     data = {
@@ -155,12 +213,12 @@ def postMultiDataVaiBiz(data):
             headers=HEADER,
             data=json.dumps(data)
         )
-
     except Exception, e:
         print e
         print "Connect Error({}): {}".format(e.errno, e.strerror)
     else:
         print response.status_code
+        print response.content
     return response
 
 
@@ -183,6 +241,7 @@ def postMultiDataVaiPegasus(sid, data):
         time.sleep(5)
     else:
         print response.status_code
+        print response.content
 
     return response
 
