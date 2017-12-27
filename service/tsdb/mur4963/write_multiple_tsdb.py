@@ -17,7 +17,9 @@ def main():
     global host
     global domain
     # domain = "stacy4.apps.exosite-staging.io/tsdb/write"
+    # domain = "stacy4.apps.exosite-staging.io/tsdb/write2"
     domain = "stacy4.apps.exosite-staging.io/write"
+
     # host = "localhost:4000"
     # domain = "stacychen.apps.exosite-dev.io/write"
     # host = "pegasus-cass-service-dev.hosted.exosite.io"
@@ -40,27 +42,29 @@ def main():
     # write(solution, "qa_metrics", metricsCount=1, tagsCount=0,
     # metricsSize=5, count=2,return_ts=True)
 
-
-    write(solution, 0, 100, "qa_metrics", metricsCount=1,
-          tagsCount=0, metricsSize=100, count=2001, return_ts=False)
-
-    # write(solution, 0, 100,  "qa_metrics", metricsCount=100,
-    #       tagsCount=0, metricsSize=100, count=21, return_ts=False)
-
-    # data/post_results_1513927432649.txt
+    # 102.4kb(102,394 bytes) limit file
+    # results/post_results_1514346430089.txt
     # write(solution, 0, 100, "qa_metrics", metricsCount=1,
-    #       tagsCount=20, metricsSize=100, count=96, return_ts=False)
+    #       tagsCount=0, metricsSize=100, count=2001, return_ts=False, saveDataY=0)
 
-    # data/post_results_1513925433052.txt
+    #results/post_results_1514346580523.txt
+    # write(solution, 0, 100,  "qa_metrics", metricsCount=1,
+    #       tagsCount=0, metricsSize=100, count=21, return_ts=False, saveDataY=0)
+
+    # results/post_results_1514345164315.txt
+    # write(solution, 0, 100, "qa_metrics", metricsCount=1,
+    #       tagsCount=20, metricsSize=100, count=96, return_ts=False, saveDataY=0)
+
+    # results/post_results_1514345401426.txt
     # write(solution, 0, 100, "qa_metrics", metricsCount=100,
-    #       tagsCount=19, metricsSize=100, count=2, return_ts=False)
+    #       tagsCount=19, metricsSize=100, count=2, return_ts=False, saveDataY=0)
 
-    # data/post_results_1513927727366.txt
+    # results/post_results_1514345732564.txt
     # write(solution, 0, 100, "qa_metrics", metricsCount=10,
-    #       tagsCount=5, metricsSize=100, count=34, return_ts=False)
+    # tagsCount=5, metricsSize=100, count=34, return_ts=False, saveDataY=0)
 
 
-def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False):
+def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False, saveDataY=0):
     response = ""
     data = ""
     avg_time = 0
@@ -75,7 +79,7 @@ def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize
     #     response = postMultiDataVaiPegasus(solution['sid'], postData)
     #     all = time.time() - startTime
     #     avg_time = avg_time + all
-    #     post_path = saveData(postData)
+    #     post_path = saveData(postData,saveDataY)
     #     data = addResult(solution, metricName, metricsCount,
     #                      tagsCount, metricsSize, count, response, all, post_path) + data
     # avg_time = float(avg_time / (end - start))
@@ -89,7 +93,7 @@ def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize
         postData = getData(
             metricName, metricsCount, tagsCount, metricsSize, count, return_ts)
         response = postMultiDataVaiBiz(postData)
-        post_path = saveData(postData)
+        post_path = saveData(postData, saveDataY)
         avg_time = avg_time + convertToInteger(response)
         data = addResult(solution, metricName, metricsCount,
                          tagsCount, metricsSize, count, response, convertToInteger(response), post_path) + data
@@ -101,30 +105,33 @@ def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize
 
 def convertToInteger(resp):
     time = resp.content
-    if time.find("ms") != -1:
-        time = time.strip('ms')
-        time = float(time.strip())/1000
-    elif time.find("s") != -1:
-        time = time.strip('s')
-        time = float(time.strip())
+    if resp.status_code == 200:
+        if time.find("ms") != -1:
+            time = time.strip('ms')
+            time = float(time.strip()) / 1000
+        elif time.find("s") != -1:
+            time = time.strip('s')
+            time = float(time.strip())
+        else:
+            time = 0
     else:
         time = 0
     return time
 
 
-def saveData(postData):
+def saveData(postData, y):
     timestamp = int(round(time.time() * 1000))
-    result_path = "data/post_results_{}.txt".format(timestamp)
     post_path = "data/post_body_{}.txt".format(timestamp)
     data = ""
-    try:
-        f = open(post_path, "w")
+    if y == 1:
         try:
-            f.write(json.dumps(postData))  # Write a string to a file
-        finally:
-            f.close()
-    except IOError:
-        pass
+            f = open(post_path, "w")
+            try:
+                f.write(json.dumps(postData))  # Write a string to a file
+            finally:
+                f.close()
+        except IOError:
+            pass
     return post_path
 
 
@@ -146,7 +153,7 @@ def addResult(solution, metricName, metricsCount, tagsCount, metricsSize, count,
 
 def saveResult(data, avg_time):
     timestamp = int(round(time.time() * 1000))
-    result_path = "data/post_results_{}.txt".format(timestamp)
+    result_path = "results/post_results_{}.txt".format(timestamp)
     data = "Avg Spend time: {} \n".format(avg_time) + data
     print "Avg Spend time: {} \n".format(avg_time)
     print "export Results to {} \n".format(result_path)
