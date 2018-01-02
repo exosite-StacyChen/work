@@ -1,0 +1,36 @@
+{"role_id":"employee"}
+{"role_id":"admin"}
+{"role_id":"guest"}
+{
+  "parameter": [
+    {
+      "name": "location"
+    },
+    {
+      "name": "sn"
+    }
+  ],
+  "role_id": "guest"
+}
+{
+  "parameter": [
+    {
+      "name": "sn"
+    },
+    {
+      "name": "location"
+    }
+  ],
+  "role_id": "admin"
+}
+{
+  "parameter": [
+    {
+      "name": "location"
+    },
+    {
+      "name": "sn"
+    }
+  ],
+  "role_id": "employee"
+}

@@ -1,4 +1,4 @@
-{"metrics": ["qa_metrics"]}
+{"metrics": ["qa_metrics"],"relative_start":"-14d"}
 {
   "columns": [
     "time",
@@ -412,7 +412,7 @@
   ]
 }
 
-{"metrics": ["qa_metricsAndTags"], "tags": {"tags_Name": "qa_metricsAndTags"}}
+{"metrics": ["qa_metricsAndTags"], "tags": {"tags_Name": "qa_metricsAndTags"},"relative_start":"-14d"}
 
 {
   "columns": [
@@ -829,7 +829,7 @@
   ]
 }
 
-{"metrics": ["qa_metricsM_1", "qa_metricsM_0"], "tags": {}}
+{"metrics": ["qa_metricsM_1", "qa_metricsM_0"], "tags": {},"relative_start":"-14d"}
 {
   "columns": [
     "time",
@@ -1865,7 +1865,7 @@
   ]
 }
 
-{"metrics": ["qa_metricsAndTagsM_0", "qa_metricsAndTagsM_1"], "tags": {"qa_metricsAndTagsM_0": "qa_metricsAndTagsM", "qa_metricsAndTagsM_1": "qa_metricsAndTagsM"}}
+{"metrics": ["qa_metricsAndTagsM_0", "qa_metricsAndTagsM_1"], "tags": {"qa_metricsAndTagsM_0": "qa_metricsAndTagsM", "qa_metricsAndTagsM_1": "qa_metricsAndTagsM"},"relative_start":"-14d"}
 
 {
   "columns": [

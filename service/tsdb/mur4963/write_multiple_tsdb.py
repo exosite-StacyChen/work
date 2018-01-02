@@ -44,24 +44,24 @@ def main():
 
     # 102.4kb(102,394 bytes) limit file
     # results/post_results_1514346430089.txt
-    # write(solution, 0, 100, "qa_metrics", metricsCount=1,
-    #       tagsCount=0, metricsSize=100, count=2001, return_ts=False, saveDataY=0)
+    # write(solution, 0, 1, "qa_metrics", metricsCount=1,
+    #       tagsCount=0, metricsSize=100, count=2001, return_ts=False, saveDataY=1)
 
-    #results/post_results_1514346580523.txt
-    # write(solution, 0, 100,  "qa_metrics", metricsCount=1,
-    #       tagsCount=0, metricsSize=100, count=21, return_ts=False, saveDataY=0)
+    # results/post_results_1514346580523.txt
+    # write(solution, 0, 1,  "qa_metrics", metricsCount=100,
+    #       tagsCount=0, metricsSize=100, count=21, return_ts=False, saveDataY=1)
 
     # results/post_results_1514345164315.txt
-    # write(solution, 0, 100, "qa_metrics", metricsCount=1,
-    #       tagsCount=20, metricsSize=100, count=96, return_ts=False, saveDataY=0)
+    # write(solution, 0, 1, "qa_metrics", metricsCount=1,
+    #       tagsCount=20, metricsSize=100, count=96, return_ts=False, saveDataY=1)
 
     # results/post_results_1514345401426.txt
-    # write(solution, 0, 100, "qa_metrics", metricsCount=100,
-    #       tagsCount=19, metricsSize=100, count=2, return_ts=False, saveDataY=0)
+    write(solution, 0, 1, "qa_metrics", metricsCount=100,
+          tagsCount=19, metricsSize=100, count=2, return_ts=False, saveDataY=1)
 
     # results/post_results_1514345732564.txt
-    # write(solution, 0, 100, "qa_metrics", metricsCount=10,
-    # tagsCount=5, metricsSize=100, count=34, return_ts=False, saveDataY=0)
+    # write(solution, 0, 1, "qa_metrics", metricsCount=10,
+    # tagsCount=5, metricsSize=100, count=34, return_ts=False, saveDataY=1)
 
 
 def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False, saveDataY=0):
