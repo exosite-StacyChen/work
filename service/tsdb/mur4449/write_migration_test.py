@@ -15,12 +15,12 @@ import signal
 def main():
     host = "localhost:4000"
 
-    # solutions = [
-    #     {
-    #         "name": "stacy",
-    #         "sid": "h4dareoylqaq0000"
-    #     }
-    # ]
+    solutions = [
+        {
+            "name": "stacy",
+            "sid": "x4iv6eyobnhg00000"
+        }
+    ]
     # solutions = [
     #     {
     #         "name": "stacy2",
@@ -32,16 +32,6 @@ def main():
     # write(host, solutions, 0, 100, "qa_metricsAndTags",1,1)
     # write(host, solutions, 0, 100, "qa_metricsM",2,0)
     # write(host, solutions, 0, 100, "qa_metricsAndTagsM",2,2)
-
-    # if sys.argv[1] == "1":
-    #     Merics1with5g(host, startTime, endTime)
-    # elif sys.argv[1] == "10":
-    #     Merics10with5g(host, startTime, endTime)
-    # elif sys.argv[1] == "50":
-    #     Merics50with5g(host, startTime, endTime)
-    # else:
-    #     print "select metrics number"
-
 
 def getData(metricName,metricsCount,tagsCount):
     metrics = {}
