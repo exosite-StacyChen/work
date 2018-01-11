@@ -1,3 +1,8 @@
+${database}    db1fcef5f64f58eee36a09a60d95c25ced
+${hostname}    murano-rds-staging-databases.csbg0yn8ehcm.us-west-1.rds.amazonaws.com
+${password}    Kg6yWLTepWp68VDuCw2itaRBduishDjRRMUw
+${username}    db1fcef5f64f58eee36a09a60d95c25ced
+
 Murano CLI can postgresql with sql
     [Setup]    TestSetupForCreateApplicationAndTable
     ${result} =    Shell Call    murano    postgresql    ${selectSQL}
@@ -15,7 +20,7 @@ Murano CLI can get application logs
 Trigger Application Log And Verify Log Content
 	[Arguments]    ${command}    ${function}=${EMPTY}
 	${result} =    Shell Call    murano    ${command}    ${function}    --raw
-    Verify Result Line Should Contain Expected Message    ${result}    type=>"script"    message=>"Endpoint POST /murano/cli/timer done with code=200"
+    Verify Result Line Should Contain Expected Message    ${result}    type=>"script"    message=>"Endpoint POST /muranocli/timer done with code=200"
     Verify Result Line Should Contain Expected Message    ${result}    type=>"call"    message=>"service call failed"
     Verify Result Line Should Contain Expected Message    ${result}    type=>"event"    message=>"script failed"
     Verify Result Line Should Contain Expected Message    ${result}    type=>"config"    message=>"Solution created library."
@@ -27,6 +32,8 @@ Create Application And Upload Router
     Set Test Variable    ${domain}    https://${applicationName}.${SOLUTION_HOST}
     ${applicationID} =    Create Solution Via API    ${applicationName}    businessId=${VALID_ADC_COMPANY_ID}    types=application
     Upload Route File From Resource Dictionary    ${applicationID}    service_muranocli
+    Add Service To Solution    ${applicationID}    postgresql
+    Update Serviceconfig Via API    ${solutionID}    postgresql    {"parameters":{"Username":"${username}","Password":"${password}","Hostname":"${hostname}","Database":"${database}"}}
     Create Session    solution    ${domain}    verify=False
 
 TestSetupForCreateApplicationAndTable
@@ -35,7 +42,7 @@ TestSetupForCreateApplicationAndTable
     ${column} =    Generate Random String    5    [LOWER]
     ${value} =    Generate Random String    5    [LOWER]
     &{data} =    Create Dictionary    createSQL=CREATE TABLE qa${time} (${column} varchar)    insertSQL=INSERT INTO qa${time} VALUES ($${value}$);
-    ${resp} =    Post Request    solution    /murano/relationalDB/insert    data=&{data}    headers=&{headers}
+    ${resp} =    Post Request    solution    /muranocli/relationalDB/insert    data=&{data}    headers=&{headers}
     Set Test Variable    ${selectSQL}    SELECT * FROM qa${time}
 
 TestSetupForCreateApplicationAndTriggerLog
@@ -45,8 +52,8 @@ TestSetupForCreateApplicationAndTriggerLog
 Trigger Log Of All Type
 	${random} =    Generate Random String    5    [LETTERS]
 	Update Eventhandler Via API    ${applicationID}    timer    timer    print(request)
-    ${resp} =    Post Request    solution    /murano/cli/timer    data={"timer_id":"${random}", "message":"${random}", "duration":1000}    headers=&{headers}
-	${resp} =    Post Request    solution    /murano/cli/timer    data={}    headers=&{headers}
+    ${resp} =    Post Request    solution    /muranocli/timer    data={"timer_id":"${random}", "message":"${random}", "duration":1000}    headers=&{headers}
+	${resp} =    Post Request    solution    /muranocli/timer    data={}    headers=&{headers}
 	Create Module Via API    ${applicationID}   ${random}
 	Set Test Variable    ${random}
 

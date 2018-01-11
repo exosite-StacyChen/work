@@ -17,7 +17,7 @@ class ExoSolution(object):
 
     def __init__(self):
         try:
-            self.EMAIL = "testing@exosite.com"
+            self.EMAIL = "stacychen@exosite.com"
             self.PASSWORD = "1234eszxcv++"
             self.SOLUTION_HOST = "apps.exosite-staging.io"
             self.HOST = "https://{}/api:1".format(
@@ -581,12 +581,12 @@ def main(ExoSolution):
     # ExoSolution.create_role_via_api(
     # solution['sid'], "employee", [{"name": "sn"},{"name": "location"}])
 
-    # write(host, ExoSolution, solution, "admin", "location", 1, 50)
-    write(host, ExoSolution, solution, "admin", "sn", 50, 101)
-    write(host, ExoSolution, solution, "guest", "location", 50, 101)
-    write(host, ExoSolution, solution, "guest", "sn", 50, 101)
-    write(host, ExoSolution, solution, "employee", "location", 50, 101)
-    write(host, ExoSolution, solution, "employee", "sn", 50, 101)
+    # write(host, ExoSolution, solution, "admin", "location", 1, 101)
+    # write(host, ExoSolution, solution, "admin", "sn", 1, 101)
+    # write(host, ExoSolution, solution, "guest", "location", 1, 101)
+    # write(host, ExoSolution, solution, "guest", "sn", 1, 101)
+    # write(host, ExoSolution, solution, "employee", "location", 1, 101)
+    # write(host, ExoSolution, solution, "employee", "sn", 1, 101)
 
 
 def getData(size):

@@ -66,41 +66,41 @@ if [[ "$EXCHANGE" == "Y" ]] || [[ "$EXCHANGE" == "y" ]]; then
     printf "Purchase End\n"
 fi
 
-# if [[ "$Fail" == 0 ]]; then
-#     printf "Service Adding Start\n"
-#     for i in "${SERVICE[@]}"
-#     do
-#         printf "\n--------\n"
-#         printf "Add Service: $i \n"
-#         RESP=$(
-#             curl 'http://localhost:8081/api/v1/solution/'$SOLUTION_ID'/serviceconfig' \
-#                  -H 'Content-Type: application/json' \
-#                  -X POST -d '{"service":"'$i'","solution_id":"'$SOLUTION_ID'"}' \
-#                  -k --silent -L -w "\n%{http_code}"
-#         )
+if [[ "$Fail" == 0 ]]; then
+    printf "Service Adding Start\n"
+    for i in "${SERVICE[@]}"
+    do
+        printf "\n--------\n"
+        printf "Add Service: $i \n"
+        RESP=$(
+            curl 'http://localhost:8081/api/v1/solution/'$SOLUTION_ID'/serviceconfig' \
+                 -H 'Content-Type: application/json' \
+                 -X POST -d '{"service":"'$i'","solution_id":"'$SOLUTION_ID'"}' \
+                 -k --silent -L -w "\n%{http_code}"
+        )
 
-#         STATUS="${RESP##*$'\n'}"           
-#         CONTENT="${RESP%$'\n'*}"
+        STATUS="${RESP##*$'\n'}"           
+        CONTENT="${RESP%$'\n'*}"
 
-#         if [[ "$STATUS" == 200 ]] ; then
-#             printf "200 Add Service Success ..... \n"
-#         elif [[ "$STATUS" == 409 ]] ; then
-#             printf "409 Add Service Fail : Service Is Existing In Application \n"
-#         elif [[ "$STATUS" == 424 ]] ; then
-#             printf "424 Add Service Fail : Service Name InCorrect \n"
-#             break
-#         elif [[ "$STATUS" == 000 ]] ; then
-#             printf "Please login dqa-env/exo-openshift-hopper \n"
-#             break
-#         else
-#             printf "Not Expected Error : ${STATUS} ${CONTENT} \n"
-#             break
-#         fi
-#         printf "\n--------\n"
-#     done
-#     printf "\n--------\n"
-#     printf "Service Adding End\n"
-# fi
+        if [[ "$STATUS" == 200 ]] ; then
+            printf "200 Add Service Success ..... \n"
+        elif [[ "$STATUS" == 409 ]] ; then
+            printf "409 Add Service Fail : Service Is Existing In Application \n"
+        elif [[ "$STATUS" == 424 ]] ; then
+            printf "424 Add Service Fail : Service Name InCorrect \n"
+            break
+        elif [[ "$STATUS" == 000 ]] ; then
+            printf "Please login dqa-env/exo-openshift-hopper \n"
+            break
+        else
+            printf "Not Expected Error : ${STATUS} ${CONTENT} \n"
+            break
+        fi
+        printf "\n--------\n"
+    done
+    printf "\n--------\n"
+    printf "Service Adding End\n"
+fi
 
 printf "\n -----------End----------\n"
 

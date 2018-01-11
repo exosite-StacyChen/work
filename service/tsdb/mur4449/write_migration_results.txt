@@ -1,4 +1,8 @@
 https://stacy.apps.exosite-staging.io/docs/#!/default/posttsdbquery
+{"metrics":["qa_metricsM_1","qa_metricsM_0","qa_metricsAndTags_77","qa_metricsAndTags_76","qa_metricsAndTags_75","qa_metricsAndTags_74","qa_metricsAndTags_73","qa_metricsAndTags_72","qa_metricsAndTags_71","qa_metricsAndTags_70","qa_metricsAndTags_79","qa_metricsAndTags_78","qa_metricsAndTags_33","qa_metricsAndTags_32","qa_metricsAndTags_31","qa_metricsAndTags_30","qa_metricsAndTags_37","qa_metricsAndTags_36","qa_metricsAndTags_35","qa_metricsAndTags_34","qa_metricsAndTags_39","qa_metricsAndTags_38","qa_metricsAndTags_5","qa_metricsAndTags_4","qa_metricsAndTags_7","qa_metricsAndTags_6","qa_metricsAndTags_3","qa_metricsAndTags_2","qa_metricsAndTags_9","qa_metricsAndTags_8","qa_metricsAndTags_60","qa_metricsAndTags_61","qa_metricsAndTags_62","qa_metricsAndTags_63","qa_metricsAndTags_64","qa_metricsAndTags_29","qa_metricsAndTags_66","qa_metricsAndTags_67","qa_metricsAndTags_24","qa_metricsAndTags_25","qa_metricsAndTags_26","qa_metricsAndTags_27","qa_metricsAndTags_20","qa_metricsAndTags_21","qa_metricsAndTags_22","qa_metricsAndTags_23","qa_metricsAndTags_59","qa_metricsAndTags_58","qa_metricsAndTags_51","qa_metricsAndTags_50","qa_metricsAndTags_53","qa_metricsAndTags_52","qa_metricsAndTags_55","qa_metricsAndTags_54","qa_metricsAndTags_57","qa_metricsAndTags_56","qa_metricsAndTags_15","qa_metricsAndTags_14","qa_metricsAndTags_17","qa_metricsAndTags_16","qa_metricsAndTags_11","qa_metricsAndTags_10","qa_metricsAndTags_13","qa_metricsAndTags_12","qa_metricsAndTags_28","qa_metricsAndTags_19","qa_metricsAndTags_18","qa_metricsAndTags_65","qa_metricsAndTags_99","qa_metricsAndTags_98","qa_metricsAndTags_95","qa_metricsAndTags_94","qa_metricsAndTags_97","qa_metricsAndTags_96","qa_metricsAndTags_91","qa_metricsAndTags_90","qa_metricsAndTags_93","qa_metricsAndTags_92","qa_metricsAndTags_68","qa_metricsAndTags_69","qa_metricsAndTags_48","qa_metricsAndTags_49","qa_metricsAndTags_42","qa_metricsAndTags_43","qa_metricsAndTags_40","qa_metricsAndTags_41","qa_metricsAndTags_46","qa_metricsAndTags_47","qa_metricsAndTags_44","qa_metricsAndTags_45","qa_metricsAndTags_88","qa_metricsAndTags_89","qa_metricsAndTags_86","qa_metricsAndTags_87","qa_metricsAndTags_84","qa_metricsAndTags_85","qa_metricsAndTags_82","qa_metricsAndTags_83","qa_metricsAndTags_80","qa_metricsAndTags_81"],"relative_start":"-20d"}
+
+
+
 {"metrics": ["qa_metrics_0"]}
 {
   "columns": [
@@ -832,7 +836,7 @@ https://stacy.apps.exosite-staging.io/docs/#!/default/posttsdbquery
 
 
 https://stacy2.apps.exosite-staging.io/docs/#!/default/posttsdbquery
-{"metrics": ["qa_metricsM_1", "qa_metricsM_0"], "tags": {},"relative_start":"-20d"}
+{"metrics": ["qa_metricsM_1", "qa_metricsM_0"], "tags": {}}
 {
   "columns": [
     "time",
