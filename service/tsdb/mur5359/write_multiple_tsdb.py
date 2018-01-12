@@ -18,9 +18,9 @@ def main():
     global domain
     # domain = "stacy4.apps.exosite-staging.io/tsdb/write"
     # domain = "stacy4.apps.exosite-staging.io/tsdb/write2"
-    domain = "teststacy.apps.exosite-staging.io/write"
-    # domain = "teststacy.apps.exosite-staging.io/write2"
-    # domain = "teststacy.apps.exosite-staging.io/write3"
+    #domain = "teststacy.apps.exosite-staging.io/write"
+    #domain = "teststacy.apps.exosite-staging.io/write2"
+    domain = "teststacy.apps.exosite-staging.io/write3"
 
     # host = "localhost:4000"
     # domain = "stacychen.apps.exosite-dev.io/write"
@@ -45,27 +45,31 @@ def main():
     # metricsSize=5, count=2,return_ts=True)
 
 
-
     # 102.4kb(102,394 bytes) limit file
     # results/post_results_1514346430089.txt
+    #results/post_results_1515744299925.txt
     # write(solution, 0, 1, "qa_metrics", metricsCount=1,
-    #       tagsCount=0, metricsSize=100, count=2000, return_ts=False, saveDataY=1)
+    #       tagsCount=0, metricsSize=100, count=2000, return_ts=False, saveDataY=0)
 
     # results/post_results_1514346580523.txt
+    #results/post_results_1515744505941.txt
     # write(solution, 0, 1,  "qa_metrics", metricsCount=100,
-    #       tagsCount=0, metricsSize=100, count=20, return_ts=False, saveDataY=1)
+    #       tagsCount=0, metricsSize=100, count=20, return_ts=False, saveDataY=0)
 
     # results/post_results_1514345164315.txt
-    # write(solution, 0, 1, "qa_metrics", metricsCount=1,
-    #       tagsCount=20, metricsSize=100, count=95, return_ts=False, saveDataY=1)
+    #results/post_results_1515743534365.txt
+    #write(solution, 0, 100, "qa_metrics", metricsCount=1,
+     #      tagsCount=20, metricsSize=100, count=95, return_ts=False, saveDataY=0)
 
     # results/post_results_1514345401426.txt
-    # write(solution, 0, 1, "qa_metrics", metricsCount=100,
-    #       tagsCount=19, metricsSize=100, count=1, return_ts=False, saveDataY=1)
+    #results/post_results_1515743832552.txt
+    #write(solution, 0, 100, "qa_metrics", metricsCount=100,
+    #       tagsCount=19, metricsSize=100, count=1, return_ts=False, saveDataY=0)
 
     # results/post_results_1514345732564.txt
-    # write(solution, 0, 1, "qa_metrics", metricsCount=10,
-    # tagsCount=5, metricsSize=100, count=33, return_ts=False, saveDataY=1)
+    #results/post_results_1515744017141.txt
+    #write(solution, 0, 100, "qa_metrics", metricsCount=10,
+     #tagsCount=5, metricsSize=100, count=33, return_ts=False, saveDataY=0)
 
 
 def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False, saveDataY=0):
