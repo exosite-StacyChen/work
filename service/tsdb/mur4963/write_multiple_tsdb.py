@@ -64,8 +64,8 @@ def main():
     #       tagsCount=19, metricsSize=100, count=1, return_ts=False, saveDataY=1)
 
     # results/post_results_1514345732564.txt
-    # write(solution, 0, 1, "qa_metrics", metricsCount=10,
-    # tagsCount=5, metricsSize=100, count=33, return_ts=False, saveDataY=1)
+    write(solution, 0, 1, "qa_metrics", metricsCount=10,
+    tagsCount=5, metricsSize=100, count=33, return_ts=False, saveDataY=1)
 
 
 def write(solution, start, end, metricName, metricsCount, tagsCount, metricsSize, count, return_ts=False, saveDataY=0):
