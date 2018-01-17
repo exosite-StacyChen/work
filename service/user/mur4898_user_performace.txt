@@ -1,3 +1,14 @@
+User.getRole()
+User.hasUserRoleParam()
+User.listRoleParamUsers()
+User.listRoleUsers()
+User.listRoles()
+User.listUserRoleParamValues()
+User.listUserRoles()
+
+
+
+
 getRole
 	{"role_id":"roleId"}
 setup

@@ -1,14 +1,23 @@
 write data
-
 {
     "metrics": {
-        "qa_string": "test",
+        "qa_string": "qa",
         "qa_integer": 2222
     },
     "tags": {
         "qa": "1"
     },
     "ts":"1515748793s"
+}
+
+{
+    "metrics": [
+        "qa_string",
+        "qa_integer"
+    ],
+    "tags": {
+        "qa": "1"
+    }
 }
 
 export data
@@ -32,7 +41,7 @@ export data
             },
             {
                 "replace": {
-                    "match": "qa",
+                    "match": "test",
                     "to": "replace2"
                 }
             }

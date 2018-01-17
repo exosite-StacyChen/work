@@ -4,13 +4,13 @@
 {
   "parameter": [
     {
-      "name": "location"
+      "name": "sn"
     },
     {
-      "name": "sn"
+      "name": "location"
     }
   ],
-  "role_id": "guest"
+  "role_id": "employee"
 }
 {
   "parameter": [
@@ -26,11 +26,11 @@
 {
   "parameter": [
     {
-      "name": "location"
+      "name": "sn"
     },
     {
-      "name": "sn"
+      "name": "location"
     }
   ],
-  "role_id": "employee"
+  "role_id": "guest"
 }
