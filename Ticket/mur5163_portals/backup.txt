@@ -4,7 +4,8 @@ datapot: resource against one deivce
 testing domain:https://apitesting-1406259377.exosite.com/login
 testing user: testing@exosite.com
 
-
+Hitach account:testing+pennyfeng@exosite.com
+Hitach password:Hitach123
 
 
 curl 'https://apitesting-501536633.exosite.com/api/portals/v1/users/4145747708/permissions' \
@@ -52,7 +53,6 @@ curl 'https://apitesting-501536633.exosite.com/api/portals/v1/users/4145747708/p
 
 
 
-
 curl 'https://apitesting-1406259377.exosite.com/api/portals/v1/users/3411634735/groups' \
      -X POST \
      -d '{"name":"testingqa"}' \
@@ -62,3 +62,9 @@ curl 'https://apitesting-1406259377.exosite.com/api/portals/v1/users/3411634735/
 {"email":"evelynhuang@exosite.com","password":"1234eszxcv++"}
 
 7uolnMXpgadkgb9Q7gqgX87q9RvS0hzaLhEEtrnb-7HybCP9O3Gkdih7AFTVLfW4LDSj1-8V5af5VyXa7e_iIAAzm2ai
+
+curl -X POST 'https://stacy.apps.exosite-dev.io/portals/hitachi' -d '{"email":"testing+pennyfeng@exosite.com","password":"Hitach123"}' -H 'Content-Type:application/json' | jq .
+
+curl -X POST 'https://stacy.apps.exosite-dev.io/portals/getUserToken' -d '{"email":"evelynhuang@exosite.com","password":"1234eszxcv++"}' -H 'Content-Type:application/json'
+
+curl -X POST 'https://stacy.apps.exosite-dev.io/portals/getUserToken' -d '{"email":"testing+pennyfeng@exosite.com","password":"Hitach123"}' -H 'Content-Type:application/json'

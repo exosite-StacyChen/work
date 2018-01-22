@@ -389,3 +389,12 @@ return
   {},
   {}
 ]
+
+POST /portals/Hitachi
+endpoint
+local portals = require "testportals"
+portals.setService(Hitachi)
+
+return portals.getUserToken(request.body)
+body
+{"email":"testing+pennyfeng@exosite.com","password":"Hitach123"}
