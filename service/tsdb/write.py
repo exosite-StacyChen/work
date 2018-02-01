@@ -153,15 +153,16 @@ def main():
     # startTime = 1513749401510
     # startTime= 1526541578326
     endTime = 1537497255000
+
     solutions = [
         {
             "name": "tsdb-5g-20170814",
-            "sid": "o11ykvtva1qvk0000"
+            "sid": "d4gwmq3w7a8800000"
         }
     ]
-    interval = (endTime - startTime) / 3000 
+    interval = (endTime - startTime) / 3159359.6 
     write(host, solutions, int(startTime),
-          endTime, interval, "metric10", 10)
+          endTime, interval, "metric", 1)
 
     # if sys.argv[1] == "1":
     #     Merics1with5g(host, startTime, endTime)
@@ -174,7 +175,7 @@ def main():
 
 
 def get500MData(metricName, count, time):
-    file = os.urandom(37470)
+    file = os.urandom(5)
     file = base64.b64encode(file).decode('utf-8')
     byte = sys.getsizeof(repr(file))
     print "{} bytes".format(byte*count)
@@ -197,7 +198,8 @@ def get500MData(metricName, count, time):
 def write(host, solutions, startTime, endTime, interval, metricName, count, input_count=1):
     start = time.time()
     for i in range(startTime, endTime, int(interval)):
-        stog = 50000 * input_count
+        # stog = 50000 * input_count
+        stog = 5 * input_count
         out = 0
         while not out:
             print solutions

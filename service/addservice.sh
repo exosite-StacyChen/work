@@ -22,7 +22,7 @@ printf  "solutionID:${SOLUTION_ID} \n"
 printf  "BUSINESS_ID:${BUSINESS_ID} \n"
 printf  "EXCHANGE:${EXCHANGE} \n"
 
-SERVICE=("timer" "twilio" "auth0" "mbed" "bulknotify" "spms" "http" "salesforceiot" "postgresql" "eventhub" "portals" "scripts")
+SERVICE=("timer" "twilio" "auth0" "mbed" "bulknotify" "spms" "http" "salesforceiot" "postgresql" "eventhub" "portals" "scripts" "analytics")
 ELEMENTID=("5955b9eeb3e6b2000147cfc0" "5955b9efbf83ba00015fff45" "5955b9ecbf83ba00015fff3f" "59fc07e5a28459000146da6d" "59b6eb1ef50b8f0001dbfcc4" "5955b9edbf83ba00015fff43" "5a040251f0d1e8000102c3d5" "59facfb35e444400016a68f9" "5a2f8d12f2266c000111dee2" "5a435166b9bb180001bf78ed")
 
 Fail=0
