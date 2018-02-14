@@ -16,9 +16,14 @@ import string
 def main():
     host = "https://bizapi-staging.hosted.exosite.io/api:1/business/loz8gtd7hcmims4i/solution/"
     data = ""
+    types = input("type? ( (1)application / (2)product ) ")
+    if types == 1:
+        types = "application"
+    else:
+        types = "product"
     for x in xrange(1, 100):
         print "{} Count".format(x)
-        data = data + create_solution(host, "product")
+        data = data + create_solution(host, str(types))
     saveData(data,1)
 
 
