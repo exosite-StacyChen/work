@@ -21,7 +21,7 @@ def main():
         types = "application"
     else:
         types = "product"
-    for x in xrange(1, 100):
+    for x in xrange(1, 1000):
         print "{} Count".format(x)
         data = data + create_solution(host, str(types))
     saveData(data,1)
@@ -36,6 +36,7 @@ def create_solution(host, type):
     data = {"label": "qa{}".format(name), "type": type}
     p = ""
     try:
+        print "------------------------------"
         print "create {} ......".format(type)
         print data
         response = requests.post(
@@ -56,6 +57,7 @@ def create_solution(host, type):
         )
         print response
         p = p + "{}\n".format(response)
+        print "------------------------------"
     except Exception, e:
         print e
 
