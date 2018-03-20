@@ -16,7 +16,7 @@ import string
 def main():
     host = "bizapi-staging.hosted.exosite.io/api:1/solution"
     solution = {
-        "sid": "q3buz1hp9asg00000"
+        "sid": "o2pwvqmlm2p00000"
     }
     # solution = {
     #     "sid": "z3o3l1mca5xy00000"
@@ -53,6 +53,12 @@ def saveResult(data):
 
 def createEndpoint(host, solution, start, end):
     data = ""
+    # for x in xrange(start, end):
+    #     size = getEndpointCount(host, solution['sid'])
+    #     if size or size == 0:
+    #         print "currently endpoint count :{}".format(size)
+    #         data = "currently endpoint count :{}".format(size)
+            
     size = getEndpointCount(host, solution['sid'])
     if size or size == 0:
         print "currently endpoint count :{}".format(size)

@@ -18,9 +18,9 @@ class ExoSolution(object):
         try:
             self.EMAIL = "testing@exosite.com"
             self.PASSWORD = "1234eszxcv++"
-            self.SOLUTION_HOST = "apps.exosite-staging.io"
+            self.SOLUTION_HOST = "apps.exosite.io"
             self.HOST = "https://{}/api:1".format(
-                "bizapi-staging.hosted.exosite.io")
+                "bizapi.hosted.exosite.io")
         except:
             print('import BuiltIn failed')
 
@@ -51,8 +51,7 @@ class ExoSolution(object):
 
     def __businessId(self, businessId):
         if businessId is None:
-            businessId = self.BuiltIn.run_keyword(
-                'ExoYeti.get_business_id', self.TOKEN)
+            businessId = "loz8gtd7hcmims4i"
         return businessId
 
     def get_user_token(self, email=None, password=None):
@@ -196,6 +195,18 @@ class ExoSolution(object):
         if resp != 204:
             raise AssertionError(
                 "Solution '%s' did not be deleted --> %s" % (solutionName, resp))
+        return resp
+
+    # Comment For Delete Solution Via API
+    #    If the user is different with setting.py
+    #    Please input Business ID and Authorization Token
+    def delete_solution_via_Id(self, solutionId, token=None, businessId=None):
+        self.__headers(token)
+        resp = self.__request(
+            'delete', "/business/%s/solution/%s" % (businessId, solutionId))
+        if resp != 204:
+            raise AssertionError(
+                "Solution '%s' did not be deleted --> %s" % (solutionId, resp))
         return resp
 
     # Comment For Delete User Via API

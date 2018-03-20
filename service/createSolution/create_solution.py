@@ -11,20 +11,29 @@ import math
 import re
 import signal
 import string
+from ExoSolution import *
 
 
 def main():
-    host = "https://bizapi-staging.hosted.exosite.io/api:1/business/loz8gtd7hcmims4i/solution/"
+    bizId = "4h5v13c1zy1"
+    host = "https://bizapi.hosted.exosite.io/api:1/business/4h5v13c1zy1/solution/"
+    # host = "https://bizapi-staging.hosted.exosite.io/api:1/business/loz8gtd7hcmims4i/solution/"
     data = ""
-    types = input("type? ( (1)application / (2)product ) ")
-    if types == 1:
-        types = "application"
+    types = input("type? ( (1)application / (2)product / (3)clear solution ) ")
+    if types != 3:
+        if types == 1:
+            types = "application"
+        else:
+            types = "product"
+        for x in xrange(1, 1000):
+            time.sleep(1)
+            print "{} Count".format(x)
+            data = data + create_solution(host, str(types))
+        saveData(data, 1)
     else:
-        types = "product"
-    for x in xrange(1, 1000):
-        print "{} Count".format(x)
-        data = data + create_solution(host, str(types))
-    saveData(data,1)
+        solutions = ExoSolution.get_solutions_list(businessId=bizId)
+        for solution in solutions:
+            print(ExoSolution.delete_solution_via_Id(solution['sid'],businessId=bizId))
 
 
 def create_solution(host, type):
@@ -80,4 +89,5 @@ def saveData(postData, y):
     print post_path
 
 if __name__ == '__main__':
+    ExoSolution = ExoSolution()
     main()
