@@ -9,22 +9,27 @@ from common import *
 
 def main():
     grafanaHead = "engineering.kli.v3.tracking"
-    env = input("ENV? ( production / staging / dev )")
+    env = raw_input("ENV? ( production / staging / dev ) ")
     domain = "{}.{}.".format(grafanaHead, str(env))
-    targets = ["meet.plan", "dontmeet.plan"]
+    targets = ["ticket.goal", "ticket.actual", "meet.plan", "dontmeet.plan","spend.times"]
+    # targets = ["spend.times"]
     start = 0
     end = input("Count? ")
-    valueRange = input("Value Range(0~?)? ")
+    value_start = input("Value Range(?~)? ")
+    value_end = input("Value Range(~?)? ")
+    timestamp = int(time.time()) - 3600
+    interval = int(3600 / (end + 1))
     for x in xrange(start, end):
-        timestamp = int(time.time())
+        timestamp = timestamp + interval
         print "-------------------"
         print "Count: {} Time: {}".format(x, timestamp)
         print "-------------------"
         for target in targets:
-            value = random.randint(0, valueRange)
-            common().graphiteLog(domain + target, value)
+            value = random.randint(value_start, value_end)
+            common().graphiteLog(domain + target, value,timestamp)
             print "    Send To \"{}\" Data: {} ".format(domain + target, value)
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
 if __name__ == '__main__':
     main()
+

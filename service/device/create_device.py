@@ -8,22 +8,24 @@ import string
 def main():
     # projectId = "b5bsxk62654g00000"
     # env = "staging"
-    projectId = "n1rzjq469jvog0000"
-    env = "dev"
+    projectId = "b1tt10k23j7ts0000"
+    env = "staging"
     host = "https://bizapi-{env}.hosted.exosite.io/api:1/service/{projectId}/device2/identity".format(
         **locals())
-    create_one_device(host, env, projectId, "device_51")
-    # create_one_device(host,env, projectId, "device_50_pegasus")
-    # create_one_device(host,env, projectId, "device_50")
-    # create_one_device(host,env, projectId, "device_1001")
-    # create_device(host, 50)
+    activateHost = "https://{projectId}.m2.exosite-{env}.io/provision/activate".format(
+        **locals())
+    # create_one_device(host, activateHost, "device_51")
+    # create_one_device(host,activateHost, "device_50_pegasus")
+    # create_one_device(host,activateHost, "device_50")
+    # create_one_device(host,activateHost, "device_1001")
+    create_device(host, activateHost, 10)
     # delete_all_device(host)
 
 
-def create_one_device(host, env, projectId, sn):
+def create_one_device(host, activateHost, sn):
     print "create device {}".format(sn)
     post_request(host, sn)
-    device_activate(projectId, env ,sn)
+    device_activate(activateHost, sn)
 
 
 def getData():
@@ -34,13 +36,14 @@ def getData():
     return data
 
 
-def create_device(host, count):
+def create_device(host, activateHost, count):
     for x in xrange(count):
         print "------------------------"
         print "Count: {}".format(x)
         sn = getData()
         print "create device"
         post_request(host, sn)
+        device_activate(activateHost, sn)
         print "------------------------"
 
 
@@ -79,14 +82,13 @@ def delete_device(host, sn):
     print response
 
 
-def device_activate(projectId, env, sn):
+def device_activate(host, sn):
     HEADER = {'content-type': 'application/x-www-form-urlencoded; charset=utf-8'}
     response = ''
     data = "sn={}".format(sn)
     try:
         response = requests.post(
-            "https://{projectId}.m2.exosite-{env}.io/provision/activate".format(
-                **locals()),
+            host,
             headers=HEADER,
             data=data
         )
