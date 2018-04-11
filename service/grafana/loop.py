@@ -1,40 +1,31 @@
 import time
 import random
+import socket
 from common import *
-
-# engineering.kli.v3.tracking
-# meet.plan
-# dontmeet.plan
 
 
 def main():
-    # grafanaHead = "engineering.kli.v3.tracking"
-    # targets = ["ticket.goal", "ticket.actual", "meet.plan", "dontmeet.plan","spend.times"]
     grafanaHead = "kv.tracking"
-    env = raw_input("ENV? ( production / staging / dev ) ")
+    env = str(raw_input("ENV? ( staging / staging-preview ) ") or "staging")
     domain = "{}.{}.".format(grafanaHead, str(env))
     targets = [
-        "max.spending.times",
-        "total.clear.times",
-        "total.get.times",
-        "total.info.times",
-        "total.delete.times",
-        "total.set.times",
-        "total.get.times",
-        "delete.avg.times",
-        "delete.goal.times"
+        # "delete.times",
+        "clear.times",
+        # "get.times",
+        # "info.times",
+        # "set.times",
     ]
     start = 0
-    end = input("Count? ")
-    value_start = input("Value Range(?~)? ")
-    value_end = input("Value Range(~?)? ")
+    end = int(raw_input("Count? ") or 1)
+    value_start = int(raw_input("Value Range(?~)? ") or 1)
+    value_end = int(raw_input("Value Range(~?)? ") or 1)
 
     # calculate timestamp
     now = int(time.time())
     def_timestamp = now - 3600
-    timestamp = int(raw_input("timestamp : ") or str(def_timestamp))
+    timestamp = int(raw_input("timestamp : ") or def_timestamp)
     interval = abs(now - timestamp)
-    interval = int(interval / (end + 1))
+    interval = int(interval / end)
 
     for x in xrange(start, end):
         timestamp = timestamp + interval
@@ -43,9 +34,28 @@ def main():
         print "-------------------"
         for target in targets:
             value = random.randint(value_start, value_end)
-            common().graphiteLog(domain + target, value, timestamp)
+            # common().graphiteLog(domain + target, value, timestamp)
+            graphiteLog(domain + target, value, timestamp)
             print "    Send To \"{}\" Data: {} ".format(domain + target, value)
-        # time.sleep(0.5)
+
+
+def graphiteLog(operation, value, times):
+    data = "\"{} {} {}\"".format(operation, value, times)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # graphitePort = 8088
+    # graphiteServer = 'localhost'
+    graphitePort = 2003
+    graphiteServer = "tsdb-sink.exosite.com"
+    sock.connect((graphiteServer, graphitePort))
+    sock.sendall(data)
+    sock.shutdown(socket.SHUT_WR)
+    while 1:
+        rep = sock.recv(1024)
+        if rep == "":
+            break
+        print "Received:", repr(rep)
+    sock.close()
+
 
 if __name__ == '__main__':
     main()
