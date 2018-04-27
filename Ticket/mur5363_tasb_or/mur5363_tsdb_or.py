@@ -17,34 +17,46 @@ def main():
 
     solutions = [
         {
-            "name": "stacy",
-            "sid": "x4iv6eyobnhg00000"
+            "name": "mur5363-2",
+            "sid": "fe3439f3l9b40000"
         }
     ]
-    # solutions = [
-    #     {
-    #         "name": "stacy2",
-    #         "sid": "t4w4jtshjooa00000"
-    #     }
-    # ]
-    
-    # write(host, solutions, 0, 100, "qa_metrics",1,0)
-    # write(host, solutions, 0, 100, "qa_metricsAndTags",1,1)
-    # write(host, solutions, 0, 100, "qa_metricsM",2,0)
-    # write(host, solutions, 0, 100, "qa_metricsAndTagsM",2,2)
+    write(host, solutions, 0, 1002, "qa_metrics",1,0)
+    # saveData(getData("qa_metrics",1,101))
 
-def getData(metricName,metricsCount,tagsCount):
+
+def saveData(postData):
+    timestamp = int(round(time.time() * 1000))
+    post_path = "post_body_{}.txt".format(timestamp)
+    data = ""
+    try:
+        f = open(post_path, "w")
+        try:
+            f.write(json.dumps(postData))  # Write a string to a file
+        finally:
+            f.close()
+    except IOError:
+        pass
+
+
+def getData(metricName, metricsCount, tagsCount):
     metrics = {}
     tags = {}
     data = {}
-    for x in xrange(0,metricsCount):
+    ary = []
+    for x in xrange(0, metricsCount):
         file = os.urandom(5)
         file = base64.b64encode(file).decode('utf-8')
-        metrics.update({"{}_{}".format(metricName,x): str(file)})
+        metrics.update({"{}_{}".format(metricName, x): file})
 
-    for x in xrange(0,tagsCount):
-        tags.update({"{}_{}".format(metricName,x): str(metricName)})
-
+    # for x in xrange(0, tagsCount):
+    #     ary.append("{}_{}".format(metricName, x))
+    # tags.update({metricName: ary})
+    tags.update({metricName: "{}_{}".format(metricName, 1)})
+    # data = {
+    #     'metrics': [metricName],
+    #     'tags': tags
+    # }
     data = {
         'metrics': metrics,
         'tags': tags
@@ -53,14 +65,15 @@ def getData(metricName,metricsCount,tagsCount):
     return data
 
 
-def write(host, solutions, start, end, metricName,metricsCount,tagsCount):
+def write(host, solutions, start, end, metricName, metricsCount, tagsCount):
     for i in range(start, end, 1):
         out = 0
         while not out:
             print solutions
             for sid in solutions:
-                print sid
-                out = fillData(host, sid['sid'], getData(metricName,metricsCount,tagsCount))
+                # print sid
+                out = fillData(host, sid['sid'], getData(
+                    metricName, metricsCount, i))
         print "Count: {} ".format(i)
 
 

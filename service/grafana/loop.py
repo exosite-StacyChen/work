@@ -3,17 +3,16 @@ import random
 import socket
 from common import *
 
-
 def main():
     grafanaHead = "kv.tracking"
     env = str(raw_input("ENV? ( staging / staging-preview ) ") or "staging")
     domain = "{}.{}.".format(grafanaHead, str(env))
     targets = [
-        # "delete.times",
-        "clear.times",
-        # "get.times",
-        # "info.times",
-        # "set.times",
+        "delete_data",
+        "clear_data",
+        "get_data",
+        "info_data",
+        "set_data"
     ]
     start = 0
     end = int(raw_input("Count? ") or 1)
@@ -34,27 +33,27 @@ def main():
         print "-------------------"
         for target in targets:
             value = random.randint(value_start, value_end)
-            # common().graphiteLog(domain + target, value, timestamp)
             graphiteLog(domain + target, value, timestamp)
             print "    Send To \"{}\" Data: {} ".format(domain + target, value)
 
 
-def graphiteLog(operation, value, times):
-    data = "\"{} {} {}\"".format(operation, value, times)
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # graphitePort = 8088
-    # graphiteServer = 'localhost'
+def graphiteLog(operation, value, timestamp):
     graphitePort = 2003
-    graphiteServer = "tsdb-sink.exosite.com"
-    sock.connect((graphiteServer, graphitePort))
-    sock.sendall(data)
-    sock.shutdown(socket.SHUT_WR)
-    while 1:
-        rep = sock.recv(1024)
-        if rep == "":
-            break
-        print "Received:", repr(rep)
-    sock.close()
+    graphiteServer = 'tsdb-sink.exosite.com'
+    command = "nc {} {} -w 2 -v".format(graphiteServer, graphitePort)
+    data = "{} {} {}\n".format(operation, value, timestamp)
+    try:
+        nc = Popen(command, shell=True, stdin=PIPE,
+                   stderr=PIPE, close_fds=True, cwd=".")
+        nc.stdin.write(data)
+        line = nc.stderr.readline()
+        nc.stdin.close()
+        nc.wait()
+        output = {
+            "output": line.strip()
+        }
+    except IOError as e:
+        raise "Grafana Send Data error: {}".format(e)
 
 
 if __name__ == '__main__':

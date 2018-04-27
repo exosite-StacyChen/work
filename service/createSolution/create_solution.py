@@ -15,9 +15,10 @@ from ExoSolution import *
 
 
 def main():
-    # bizId = "4h5v13c1zy1"
-    bizId = "loz8gtd7hcmims4i"
+    bizId = "3ysz9d1t9xtdfgvi"
     env = "-staging"
+    # bizId = "q4h6oqo96qs"
+    # env = "-dev"
     host = "https://bizapi{}.hosted.exosite.io/api:1/business/{}/solution/".format(env,bizId)
     data = ""
     types = input("type? ( (1)application / (2)product / (3)clear solution ) ")

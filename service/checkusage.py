@@ -1,20 +1,25 @@
 import requests
 import json
-import calendar, time
+import calendar
+import time
 
 
-url = "http://localhost:8081/api/v1/solution/u2l1b86zyylg00000/usage"
+url = "https://pegasus-api-staging.hosted.exosite.io/api/v1/solution/u58cvblvsrmk00000/usage"
 
 payload = ""
 headers = {'content-type': 'application/json'}
-
+service = '_global'
+target = ['processing_time_total',
+          'processing_time_monthly', 'processing_time_daily']
 
 while True:
-	timestamp = calendar.timegm(time.gmtime())
-	response = requests.request("GET", url, data=payload, headers=headers)
-	usage = json.loads(response.text)
-	keys = usage['keystore']['usage']['keys']
-	size = usage['keystore']['usage']['size']
-
-	print("Timestamp: {}\tTime: {}\tKey: {}\tSize: {}".format(timestamp, time.asctime(), keys, size))
-	time.sleep(5)
+    timestamp = calendar.timegm(time.gmtime())
+    response = requests.request("GET", url, data=payload, headers=headers)
+    usage = json.loads(response.text)
+    result = "Timestamp: {}\t".format(timestamp)
+    for x in xrange(len(target)):
+        item = str(target[x])
+        result = result + \
+            "{}: {}\t".format(item, usage[service]['usage'][item])
+    print(result)
+    time.sleep(5)

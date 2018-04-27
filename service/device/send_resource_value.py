@@ -6,10 +6,10 @@ import string
 
 
 def main():
-    # projectId = "b5bsxk62654g00000"
-    # env = "staging"
-    projectId = "n1rzjq469jvog0000"
-    env = "dev"
+    projectId = "e28f0i8c3315w0000"
+    env = "staging"
+    # projectId = "n1rzjq469jvog0000"
+    # env = "dev"
 
     bizapi_host = "https://bizapi-{env}.hosted.exosite.io/api:1".format(**locals())
     host = "https://{projectId}.m2.exosite-{env}.io".format(**locals())
@@ -21,7 +21,9 @@ def main():
     # token_1001 = "ii5maryKQuprjIjGPIJxTLpx4hZzN9UvjCgaxzVa"
     # token_51_pegasus = "g0uXMwkj8jO6zvsqQAydWVmXzGzhNJfX74lNUeYR"
 
-    send_value_to_resource(host, token_51, "r_51", 51)
+    token="n4WCG9eFKiaKX9sbHTpKIyuAIaV47Ka9cJUmLGpu"
+    send_value_to_resource(host, token, "test", 51)
+    # send_value_to_resource(host, token_51, "r_51", 51)
 
     # send_value_to_resource_bizapi(
     #     bizapi_host, projectId, "device_50_pegasus", "r_51_pegasus", 51)

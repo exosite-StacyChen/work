@@ -8,7 +8,7 @@ import string
 def main():
     # projectId = "b5bsxk62654g00000"
     # env = "staging"
-    projectId = "i2gvvw0w6uqu00000"
+    projectId = "v331wxzhe6zu00000"
     env = "staging"
     host = "https://bizapi-{env}.hosted.exosite.io/api:1/service/{projectId}/device2/identity".format(
         **locals())
