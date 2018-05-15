@@ -15,18 +15,17 @@ function call_the_route {
 }
 
 # application_domain="teststacy.apps.exosite-staging.io"
-application_domain="teststacy.apps.exosite-staging.io"
-scenario=('test1' 'test2')
+application_domain="mur6094.apps.exosite-staging.io"
+scenario=('test1')
 endpoint=(
-    'query' '\'
-    'query' 'write'
+    'timer' '\'
 )
 bodys=(
-    '{"metrics":["M1"]}' '\'
-    '{"metrics":["M1"]}' '{"metrics":{"M1":"M1"}}'
+    '{"duration":100,"message":"testing"}' '\'
     )
 
 next=0
+
 for i in "${scenario[@]}"; do
     echo "{panel:title=Scenario: $i}"
     for (( j = ${next}; j < ${#endpoint[@]}; j++ )); do

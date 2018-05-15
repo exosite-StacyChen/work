@@ -4,8 +4,8 @@ import calendar
 import time
 
 
-url = "https://pegasus-api-staging.hosted.exosite.io/api/v1/solution/u58cvblvsrmk00000/usage"
-
+url = "http://pegasus-api-dev.hosted.exosite.io/api/v1/solution/f2p7yizt1uc000000/usage"
+# url = "https://stacyy.apps.exosite.io/usage"
 payload = ""
 headers = {'content-type': 'application/json'}
 service = '_global'

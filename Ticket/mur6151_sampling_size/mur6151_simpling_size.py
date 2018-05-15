@@ -17,15 +17,15 @@ def main():
 
     solutions = [
         {
-            "name": "mur5363",
-            "sid": "t4g14qg2jv0600000"
+            "name": "mur6094",
+            "sid": "k2535ky8kss5c0000"
         }
     ]
     timestamp = int(time.time())
     print "now {} ".format(timestamp)
-    write(host, solutions, 1, "mur6151", 1, 1, 7, timestamp)
-    write(host, solutions, 1, "mur6151", 1, 1, 14, timestamp)
-    write(host, solutions, 1, "mur6151", 1, 1, 21, timestamp)
+    write(host, solutions, 3, "mur6151", 30, timestamp)
+    write(host, solutions, 3, "mur6151", 60, timestamp)
+    write(host, solutions, 3, "mur6151", 90, timestamp)
 
 
 def saveData(postData):
@@ -68,23 +68,22 @@ def getData(metricName, metricsCount, tagsCount, i, timestamp):
     return data
 
 
-def write(host, solutions, end, metricName, metricsCount, tagsCount, days, timestamp):
+def write(host, solutions, end, metricName, days, timestamp):
     print "---------------"
     print "now -{} days".format(days)
     print "---------------"
+    interval = 24 * 60 * 60 * days
+    timestamp = timestamp - interval
     for i in range(0, end):
-        interval = 24 * 60 * 60 * days
-        timestamp = timestamp - interval
-        for i in range(0, 3):
-            timestamp = timestamp + i
-            out = 0
-            print "Count: {} ".format(i)
-            while not out:
-                print solutions
-                for sid in solutions:
-                    # print sid
-                    out = fillData(host, sid['sid'], getData(
-                        metricName, metricsCount, tagsCount, i, timestamp))
+        timestamp = timestamp + i
+        out = 0
+        print "Count: {} ".format(i)
+        while not out:
+            print solutions
+            for sid in solutions:
+                # print sid
+                out = fillData(host, sid['sid'], getData(
+                    metricName, 1, 1, i, timestamp))
 
 
 def fillData(host, sid, data):

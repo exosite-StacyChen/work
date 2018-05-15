@@ -14,9 +14,10 @@ import string
 
 
 def main():
+    # sid = input("solutionID? ")
     host = "bizapi-staging.hosted.exosite.io/api:1/solution"
     solution = {
-        "sid": "t4g14qg2jv0600000"
+        "sid": "w3q6p1wzyt9800000"
     }
     # solution = {
     #     "sid": "z3o3l1mca5xy00000"
@@ -58,7 +59,7 @@ def createEndpoint(host, solution, start, end):
     #     if size or size == 0:
     #         print "currently endpoint count :{}".format(size)
     #         data = "currently endpoint count :{}".format(size)
-            
+
     size = getEndpointCount(host, solution['sid'])
     if size or size == 0:
         print "currently endpoint count :{}".format(size)

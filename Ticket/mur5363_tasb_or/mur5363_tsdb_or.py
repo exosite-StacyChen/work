@@ -17,8 +17,8 @@ def main():
 
     solutions = [
         {
-            "name": "mur5363-2",
-            "sid": "fe3439f3l9b40000"
+            "name": "mur6094",
+            "sid": "k2535ky8kss5c0000"
         }
     ]
     write(host, solutions, 0, 1002, "qa_metrics",1,0)
@@ -52,7 +52,7 @@ def getData(metricName, metricsCount, tagsCount):
     # for x in xrange(0, tagsCount):
     #     ary.append("{}_{}".format(metricName, x))
     # tags.update({metricName: ary})
-    tags.update({metricName: "{}_{}".format(metricName, 1)})
+    tags.update({metricName: "{}_{}".format(metricName, 2)})
     # data = {
     #     'metrics': [metricName],
     #     'tags': tags
