@@ -1,0 +1,11 @@
+adc-staging-api-external
+adc_staging_mqtt
+dqa_http_okami
+murano-staging-docs
+murano-staging-api-external
+murano-staging-api-internal
+murano-staging-hamv2
+murano-staging-service-application-coreService
+murano-staging-service-application-performance
+murano-staging-service-solution-luaLibrary
+murano-staging-service-solution-performance

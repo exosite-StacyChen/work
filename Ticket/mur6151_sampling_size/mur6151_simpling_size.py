@@ -17,15 +17,15 @@ def main():
 
     solutions = [
         {
-            "name": "mur6094",
-            "sid": "k2535ky8kss5c0000"
+            "name": "bulkemailtesting",
+            "sid": "g1fx8muuacwow0000"
         }
     ]
     timestamp = int(time.time())
     print "now {} ".format(timestamp)
-    write(host, solutions, 3, "mur6151", 30, timestamp)
-    write(host, solutions, 3, "mur6151", 60, timestamp)
-    write(host, solutions, 3, "mur6151", 90, timestamp)
+    write(host, solutions, 3, "mur6151", 7, timestamp)
+    write(host, solutions, 3, "mur6151", 14, timestamp)
+    write(host, solutions, 3, "mur6151", 21, timestamp)
 
 
 def saveData(postData):
