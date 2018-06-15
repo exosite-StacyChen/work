@@ -152,11 +152,11 @@ def main():
     startTime = 1505903659000
     # startTime = 1513749401510
     # startTime= 1526541578326
-    endTime = 1537497255000
+    endTime = 1506020759000
 
     solutions = [
         {
-            "name": "tsdb-5g-20170814",
+            "name": "tsdb10000data",
             "sid": "d4gwmq3w7a8800000"
         }
     ]
@@ -187,8 +187,7 @@ def get500MData(metricName, count, time):
     data = {
         'metrics': metrics,
         'tags': {
-            'exp_Metric_N': str(count),
-            'exp_Name': metricName
+            'exp_Name': "metric1"
         },
         'ts': time
     }

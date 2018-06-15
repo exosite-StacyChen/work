@@ -17,15 +17,13 @@ def main():
 
     solutions = [
         {
-            "name": "bulkemailtesting",
-            "sid": "g1fx8muuacwow0000"
+            "name": "stacy3",
+            "sid": "h1j04ugyb1tsw0000"
         }
     ]
     timestamp = int(time.time())
     print "now {} ".format(timestamp)
-    write(host, solutions, 3, "mur6151", 7, timestamp)
-    write(host, solutions, 3, "mur6151", 14, timestamp)
-    write(host, solutions, 3, "mur6151", 21, timestamp)
+    write(host, solutions, 20, "qa", 1, timestamp)
 
 
 def saveData(postData):
@@ -50,7 +48,7 @@ def getData(metricName, metricsCount, tagsCount, i, timestamp):
     for x in xrange(0, metricsCount):
         # file = os.urandom(5)
         # file = base64.b64encode(file).decode('utf-8')
-        num = random.randint(1, 100)
+        num = random.randint(1, 100000)
         metrics.update({"{}_{}".format(metricName, x): num})
 
     # for x in xrange(0, tagsCount):
@@ -63,7 +61,7 @@ def getData(metricName, metricsCount, tagsCount, i, timestamp):
     data = {
         'metrics': metrics,
         'tags': tags,
-        'ts': timestamp}
+        'ts': "{}s".format(timestamp)}
     print "Data: {}".format(json.dumps(data))
     return data
 
